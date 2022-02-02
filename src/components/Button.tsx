@@ -5,11 +5,13 @@ export const Button = styled('button', {
 
   borderRadius: '10px',
 
-  padding: '0.5em 0.7em',
+  fontWeight: 'bold',
 
   '&:hover': {
     cursor: 'pointer',
   },
+
+  boxShadow: '$xl',
 
   variants: {
     variant: {
@@ -47,15 +49,19 @@ export const Button = styled('button', {
         },
       },
     },
+
     size: {
       sm: {
-        fontSize: '1rem',
+        fontSize: '$fontSizes$3',
+        padding: '$space$2 $space$3',
       },
       md: {
-        fontSize: '1.2rem',
+        fontSize: '$fontSizes$6',
+        padding: '$space$3 $space$5',
       },
       lg: {
-        fontSize: '1.5rem',
+        fontSize: '$fontSizes$9',
+        padding: '$space$5 $space$7',
       },
     },
   },
