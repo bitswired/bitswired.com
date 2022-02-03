@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Container } from '@components/core'
+import { Box } from '@components/core'
 import { CONFIG } from '@config'
 import { styled } from '@lib/stitches'
 
@@ -17,14 +17,22 @@ const Item = styled('a', {
 
 export function Navigation() {
   return (
-    <Container
+    <Box
       as="ul"
-      gap="lg"
       css={{
+        paddingInlineStart: 0,
+        margin: 'auto',
         height: '100%',
         alignItems: 'center',
         width: 'max-content',
         listStyle: 'none',
+        display: 'flex',
+        gap: '$5',
+        flexDirection: 'column',
+
+        '@bp3': {
+          flexDirection: 'row',
+        },
       }}
     >
       {CONFIG.navigation.paths.map((x) => (
@@ -34,6 +42,6 @@ export function Navigation() {
           </Link>
         </li>
       ))}
-    </Container>
+    </Box>
   )
 }
