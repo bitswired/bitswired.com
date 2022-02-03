@@ -1,17 +1,17 @@
 import { Me, Newsletter, Bitswired } from '@features/about'
 import { styled } from '@lib/stitches'
-import { Container } from 'components/layout'
 
-const Section = styled(Container, {
+const Section = styled('section', {
   width: '100%',
   flexDirection: 'column',
   margin: 'auto',
+  boxSizing: 'border-box',
 
   p: '$space$5',
 
   h1: {
     fontFamily: '$sans',
-    fontSize: '5rem',
+    fontSize: '3rem',
   },
 
   fontFamily: '$sans',
@@ -47,24 +47,25 @@ const Section = styled(Container, {
 const Wrapper = styled('div', {
   margin: 'auto',
   maxWidth: '800px',
+  fontSize: '1.25rem',
 })
 
 export default function AboutPage() {
   return (
     <>
-      <Section className="section" variant="light">
+      <Section id="newsletter" className="section" variant="light">
         <Wrapper>
           <Newsletter />
         </Wrapper>
       </Section>
 
-      <Section className="section" variant="dark">
+      <Section id="bitswired" className="section" variant="dark">
         <Wrapper>
           <Bitswired />
         </Wrapper>
       </Section>
 
-      <Section className="section" variant="light">
+      <Section id="me " className="section" variant="light">
         <Wrapper>
           <Me />
         </Wrapper>
