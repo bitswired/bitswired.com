@@ -42,6 +42,7 @@ export const { styled, theme, getCssText, globalCss, reset, keyframes } =
         ...primaryScale,
         ...secondaryScale,
         ...grayScale,
+        error: 'red',
       },
       fontSizes: {
         body: '1rem',
@@ -131,7 +132,7 @@ export const { styled, theme, getCssText, globalCss, reset, keyframes } =
         none: '0',
         sm: '0.125rem',
         default: '0.25rem',
-        mm: '0.4rem',
+        md: '0.4rem',
         lg: '0.625rem',
         xl: '1rem',
         full: '9999px',
@@ -205,10 +206,10 @@ export const { styled, theme, getCssText, globalCss, reset, keyframes } =
       }),
 
       // A property for applying width/height together
-      size: (value: Property.Width) => ({
-        width: value,
-        height: value,
-      }),
+      // size: (value: Property.Width) => ({
+      //   width: value,
+      //   height: value,
+      // }),
 
       // A property to apply linear gradient
       linearGradient: (value: string) => ({
