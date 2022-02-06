@@ -21,6 +21,10 @@ const nextConfiguration = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
+
+  images: {
+    domains: ['statics.bitswired.com'],
+  },
 }
 
 module.exports = withPlugins(
