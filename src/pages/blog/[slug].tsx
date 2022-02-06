@@ -1,7 +1,7 @@
 import { getMDXComponent } from 'mdx-bundler/client'
 import React from 'react'
 import { BlogPostLayout } from '@features/blog'
-import { getPostBySlug, listAllSlugs } from '@features/blog/utils/blog'
+import { getPostBySlug, listAllSlugs } from '@features/blog'
 
 interface BlogPostPageProps {
   postMeta: BlogPostMeta
