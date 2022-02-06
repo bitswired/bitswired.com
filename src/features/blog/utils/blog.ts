@@ -12,7 +12,7 @@ const metaSchema = Joi.object({
   tags: Joi.array().items(Joi.string()).required(),
   series: Joi.string(),
   category: Joi.string().required(),
-
+  slug: Joi.string().required(),
   published: Joi.boolean().required(),
   datePublished: Joi.date().format('YYYY-MM-DD').raw().required(),
   dateModified: Joi.date().format('YYYY-MM-DD').raw().required(),
