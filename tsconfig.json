@@ -16,7 +16,7 @@
     "incremental": true,
     "baseUrl": "./src",
     "paths": {
-      "@lib/stitches": ["lib/stitches"],
+      "@lib/*": ["lib/*"],
       "@components/core": ["components"],
       "@features/*": ["features/*"],
       "@config": ["config"]
