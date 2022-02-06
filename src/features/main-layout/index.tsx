@@ -1,3 +1,4 @@
+import { Footer } from '@features/footer'
 import { styled } from '@lib/stitches'
 import { Header } from './features/header'
 
@@ -15,6 +16,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       <Header />
       <Spacer />
       {children}
+      <Footer />
     </>
   )
 }

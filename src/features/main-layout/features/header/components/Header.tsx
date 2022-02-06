@@ -14,15 +14,17 @@ const BarWrap = styled('div', {
 
   width: '100%',
 
-  backdropFilter: 'blur(25px)',
-  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  backdropFilter: 'blur(15px)',
+  backgroundColor: 'rgba(0, 0, 0, 0.8)',
 
   zIndex: '$1',
+  overflow: 'hidden',
 
   transition: 'height 0.3s ease',
 
   '&[data-mobile-menu=true]': {
     height: '100vh',
+    transition: 'height 1.5s ease',
   },
 })
 
@@ -69,7 +71,6 @@ function HeaderMin({ isMobileMenuToggled, toggleMobileMenu }: HeaderMinProps) {
       {isMobileMenuToggled && (
         <Box
           onClick={() => toggleMobileMenu()}
-          id="JDOOD"
           css={{
             '@media (min-width: 1023px)': {
               display: 'none',

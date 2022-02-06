@@ -1,4 +1,10 @@
+import dynamic from 'next/dynamic'
 import { keyframes, styled } from '@lib/stitches'
+const NewsletterSubscriptionForm = dynamic(() =>
+  import('@features/newsletter').then(
+    (module: any) => module.NewsletterSubscriptionForm
+  )
+)
 
 const Land = styled('div', {
   width: '100vw',
@@ -21,7 +27,7 @@ const Title = styled('h1', {
   color: 'transparent',
   backgroundClip: 'text',
   textAlign: 'center',
-  fontWeight: '900',
+  fontWeight: '$extrabold',
   lineHeight: '1.2em',
 
   '@bp2': {
@@ -55,18 +61,28 @@ const Title = styled('h1', {
   },
 })
 
-const TitleWrapper = styled('div', {
+const TitleContainer = styled('div', {
   paddingTop: '4rem',
+})
+
+const NewsletterContainer = styled('div', {
+  paddingTop: '4rem',
+  maxWidth: '500px',
+  margin: 'auto',
+  px: '$space$4',
 })
 
 export function Head() {
   return (
     <Land>
-      <TitleWrapper>
+      <TitleContainer>
         <Title variant={1}>Data AI,</Title>
-        <Title variant={2}>Blockchain,</Title>
+        <Title variant={2}>Block Chain,</Title>
         <Title variant={3}>Web</Title>
-      </TitleWrapper>
+      </TitleContainer>
+      <NewsletterContainer>
+        <NewsletterSubscriptionForm />
+      </NewsletterContainer>
     </Land>
   )
 }

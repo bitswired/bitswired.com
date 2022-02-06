@@ -20,6 +20,11 @@ const FeaturesWrapper = styled('div', {
 export function Features() {
   return (
     <FeaturesWrapper>
+      <Feature name="Newsletter" icon={<FaEnvelope />}>
+        Sharing new content from Bitswired and other websites, interesting
+        papers and resources.
+      </Feature>
+
       <Feature name="Learning" icon={<FaLaptop />}>
         Data, AI, Visualization, Web ... Bitswired mission is to keep learning
         and educating about these pillars of our modern digital era.
@@ -28,11 +33,6 @@ export function Features() {
       <Feature name="Community" icon={<FaUsers />}>
         Building an involved community to learn together! You have direct impact
         on the content.
-      </Feature>
-
-      <Feature name="Newsletter" icon={<FaEnvelope />}>
-        Sharing new content from Bitswired and other websites, interesting
-        papers and resources.
       </Feature>
     </FeaturesWrapper>
   )
