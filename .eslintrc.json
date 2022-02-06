@@ -3,7 +3,7 @@
   "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
 
     // Remove unused imports
     "unused-imports/no-unused-imports": "error",
@@ -19,6 +19,7 @@
       }
     ],
 
+    // FIXME: add real path groups
     // Sort imports, care about the typescript aliases
     "import/order": [
       1,
