@@ -24,7 +24,7 @@ const BarWrap = styled('div', {
 
   '&[data-mobile-menu=true]': {
     height: '100vh',
-    transition: 'height 1.5s ease',
+    transition: 'height 1s ease',
   },
 })
 

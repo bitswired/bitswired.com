@@ -1,4 +1,5 @@
 import { Box, Button } from '@components/core'
+import { NewsltetterSubscriptionModalOpener } from '@features/newsletter'
 import { styled } from '@lib/stitches'
 
 const WireupContainer = styled('section', {
@@ -27,9 +28,11 @@ export function Wireup() {
       <Box as="p" css={{ margin: 0, marginBottom: '$4' }}>
         To The Newsletter
       </Box>
-      <Button variant="secondary-outlined" size="lg">
-        SUBSCRIBE
-      </Button>
+      <NewsltetterSubscriptionModalOpener>
+        <Button variant="secondary-outlined" size="lg">
+          SUBSCRIBE
+        </Button>
+      </NewsltetterSubscriptionModalOpener>
     </WireupContainer>
   )
 }

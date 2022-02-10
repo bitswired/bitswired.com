@@ -67,7 +67,7 @@ const TitleContainer = styled('div', {
 
 const NewsletterContainer = styled('div', {
   paddingTop: '4rem',
-  maxWidth: '500px',
+  maxWidth: '800px',
   margin: 'auto',
   px: '$space$4',
 })
