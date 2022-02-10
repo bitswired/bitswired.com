@@ -1,15 +1,16 @@
 import Image from 'next/image'
 import { AspectRatio, Box, Avatar } from '@components/core'
 import { CONFIG } from '@config'
+import { loader } from '@lib/next'
 import { styled } from '@lib/stitches'
 import { Prose } from './Prose'
 
 const Title = styled('h1', {
-  fontSize: '2.5rem',
-  fontWeight: '$regular',
+  fontSize: '1.75rem',
+  fontWeight: '$bold',
 
   '@bp2': {
-    fontSize: '3.5rem',
+    fontSize: '3rem',
   },
 })
 
@@ -24,14 +25,17 @@ export function BlogPostLayout({ postMeta, children }: BlogPostLayoutProps) {
     <Box css={{ maxWidth: '800px', margin: 'auto', px: '1rem' }}>
       <Title>{postMeta.title}</Title>
       {/* <Box css={{ width: 300 }}> */}
-      <AspectRatio.Root ratio={16 / 9}>
+      <AspectRatio ratio={16 / 9}>
         <Image
+          loader={loader}
           src={postMeta.image}
           layout="fill"
+          sizes="500px"
+          quality={50}
           alt={postMeta.title}
           priority
         />
-      </AspectRatio.Root>
+      </AspectRatio>
 
       <Avatar size="lg" src={CONFIG.images.me} alt="me" />
       <Avatar size="md" src={CONFIG.images.me} alt="me" />
