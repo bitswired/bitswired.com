@@ -1,3 +1,4 @@
+import { mauve } from '@radix-ui/colors'
 import { createStitches } from '@stitches/react'
 import { Property } from '@stitches/react/types/css'
 
@@ -18,16 +19,16 @@ const secondaryScale = {
 }
 
 const grayScale = {
-  gray1: '#f8faf9',
-  gray2: '#eaefec',
-  gray3: '#dbe3de',
-  gray4: '#cad6cf',
-  gray5: '#b8c7bf',
-  gray6: '#a4b8ad',
-  gray7: '#8ca698',
-  gray8: '#71907f',
-  gray9: '#587264',
-  gray10: '#34433b',
+  gray1: mauve.mauve1,
+  gray2: mauve.mauve2,
+  gray3: mauve.mauve3,
+  gray4: mauve.mauve4,
+  gray5: mauve.mauve5,
+  gray6: mauve.mauve6,
+  gray7: mauve.mauve7,
+  gray8: mauve.mauve8,
+  gray9: mauve.mauve9,
+  gray10: mauve.mauve10,
 }
 
 export const { styled, theme, getCssText, globalCss, reset, keyframes } =
@@ -42,6 +43,7 @@ export const { styled, theme, getCssText, globalCss, reset, keyframes } =
         ...primaryScale,
         ...secondaryScale,
         ...grayScale,
+        text: '#292929',
         error: 'red',
       },
       fontSizes: {
@@ -94,10 +96,10 @@ export const { styled, theme, getCssText, globalCss, reset, keyframes } =
       borderStyles: {},
       shadows: {
         sm: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
-        md: ' 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-        lg: ' 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
-        xl: ' 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-        '2xl': 'box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25)',
+        md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+        lg: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+        xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+        '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
       },
       transitions: {},
       space: {
