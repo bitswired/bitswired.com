@@ -8,7 +8,4 @@ export * from './Icon'
 export * from './AspectRatio'
 export * from './Avatar'
 export * from './Form'
-
-import * as joi from 'joi'
-
-export const x = joi
+export * from './Dialog'

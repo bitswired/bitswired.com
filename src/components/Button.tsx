@@ -62,6 +62,19 @@ export const Button = styled('button', {
         //   borderColor: '$secondary3',
         // },
       },
+
+      'primary-link': {
+        $$color: '$colors$primary1',
+        backgroundColor: 'inherit',
+        color: '$primary1',
+
+        '@media (hover: hover)': {
+          '&:hover': {
+            filter: 'none',
+            backgroundColor: '$gray3',
+          },
+        },
+      },
     },
 
     size: {
