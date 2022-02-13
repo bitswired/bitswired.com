@@ -45,6 +45,7 @@ export const { styled, theme, getCssText, globalCss, reset, keyframes } =
         ...grayScale,
         text: '#292929',
         error: 'red',
+        bgCode: '#EEE',
       },
       fontSizes: {
         body: '1rem',
