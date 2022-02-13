@@ -2,14 +2,14 @@ import React from 'react'
 import { Dialog, DialogContent, DialogTitle } from '@components/core'
 import { styled } from '@lib/stitches'
 import { NewsletterSubscriptionForm } from '..'
-import { NewsletterModalContext } from '../providers/NewsletterModalProvider'
+import { useNewsletterStore } from '../stores'
 
 const ContentContainer = styled('div', {
   padding: '$4',
 })
 
 export function NewsletterSubscriptionModal() {
-  const { isOpen, toggle } = React.useContext(NewsletterModalContext)
+  const { isOpen, toggle } = useNewsletterStore()
 
   return (
     <Dialog open={isOpen} modal={false}>

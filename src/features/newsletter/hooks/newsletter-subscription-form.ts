@@ -3,9 +3,8 @@ import React from 'react'
 import { FieldValues, useForm, UseFormRegister } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useMutation } from 'react-query'
-import { newsletterSubscribe } from '@features/data'
-
 import { useTracker } from './tracker'
+import { newsletterSubscribe } from '../api'
 
 interface MutationParams {
   email: string

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@components/core'
-import { NewsletterModalContext } from '../providers/NewsletterModalProvider'
+import { useNewsletterStore } from '../stores'
 
 interface NewsltetterSubscriptionModalOpenerProps {
   children: JSX.Element
@@ -9,7 +9,8 @@ interface NewsltetterSubscriptionModalOpenerProps {
 export function NewsltetterSubscriptionModalOpener({
   children,
 }: NewsltetterSubscriptionModalOpenerProps) {
-  const { toggle } = React.useContext(NewsletterModalContext)
+  const toggle = useNewsletterStore((state) => state.toggle)
+
   return (
     <Box as="span" onClick={() => toggle()}>
       {children}
