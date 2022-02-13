@@ -30,7 +30,7 @@ export function BlogPostLayout({ postMeta, children }: BlogPostLayoutProps) {
           loader={loader}
           src={postMeta.image}
           layout="fill"
-          sizes="500px"
+          sizes="(max-width: 600px) 300px, 600px"
           quality={50}
           alt={postMeta.title}
           priority

@@ -1,6 +1,4 @@
-import Image from 'next/image'
-import { AspectRatio, Box, Button, InternalLink } from '@components/core'
-import { loader } from '@lib/next'
+import { Image, AspectRatio, Box, Button, InternalLink } from '@components/core'
 import { styled } from '@lib/stitches'
 
 const CardContainer = styled('div', {
@@ -73,7 +71,6 @@ export function BlogPostCard({ postMeta }: BlogPostCardProps) {
       <ImageContainer ratio={16 / 9}>
         <InternalLink href={`/blog/${postMeta.slug}`} title={postMeta.title}>
           <Image
-            loader={loader}
             src={postMeta.image}
             layout="fill"
             sizes="500px"
