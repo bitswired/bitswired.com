@@ -21,6 +21,9 @@ export const CONFIG = {
     newsletter: {
       subscribe: 'https://public-api.bitswired.workers.dev/subscribe',
     },
+    assets: {
+      basePath: 'https://assets.bitswired.com',
+    },
   },
   paths: {
     content: {
