@@ -5,6 +5,7 @@ import { default as fsWithCallbacks } from 'fs'
 import path from 'path'
 import { CONFIG } from '@config'
 import { BlogPostLayout, validatePostMeta } from '@features/blog'
+import { mdxGeneralComponents } from '@features/mdx'
 const fs = fsWithCallbacks.promises
 
 interface BlogPostPageProps {
@@ -18,12 +19,7 @@ export default function BlogPostPage({ postMeta, code }: BlogPostPageProps) {
   return (
     <>
       <BlogPostLayout postMeta={postMeta}>
-        <Component
-          components={{
-            // FIXME
-            Figure: (props) => <img {...props} alt="Image" />,
-          }}
-        />
+        <Component components={mdxGeneralComponents} />
       </BlogPostLayout>
     </>
   )
