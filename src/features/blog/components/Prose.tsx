@@ -57,11 +57,14 @@ export const Prose = styled('article', {
     my: '0.5em',
   },
   blockquote: {
-    px: '5%',
-    py: '1em',
+    fontFamily: '$serif',
+    px: '$2',
+    py: '$4',
     textAlign: 'center',
-    fontSize: '1.3em',
+    fontSize: '2em',
+    fontWeight: '$light',
     p: {
+      margin: '0 !important',
       color: '#888 !important',
     },
   },

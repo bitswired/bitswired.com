@@ -26,9 +26,8 @@ export function NewsletterSubscriptionForm() {
       <StyledForm onSubmit={handleSubmit}>
         <Input
           css={{
-            backgroundColor: 'inherit',
+            backgroundColor: 'rgba(0,0,0,0)',
             color: '$primary1',
-            fontWeight: '$extrabold',
             fontFamily: '$sans',
           }}
           placeholder="Email address"

@@ -33,6 +33,27 @@ export const Input = styled(_Input, {
   border: '2px solid $secondary1',
   borderRadius: '$md',
 
+  '&:-webkit-autofill': {
+    '-webkit-transition':
+      'color 9999s ease-out, background-color 9999s ease-out',
+    '-webkit-transition-delay': '9999s',
+  },
+  '&:-webkit-autofill:hover': {
+    '-webkit-transition':
+      'color 9999s ease-out, background-color 9999s ease-out',
+    '-webkit-transition-delay': '9999s',
+  },
+  '&:-webkit-autofill:focus': {
+    '-webkit-transition':
+      'color 9999s ease-out, background-color 9999s ease-out',
+    '-webkit-transition-delay': '9999s',
+  },
+  '&:-webkit-autofill:active': {
+    '-webkit-transition':
+      'color 9999s ease-out, background-color 9999s ease-out',
+    '-webkit-transition-delay': '9999s',
+  },
+
   '&:focus': {
     borderColor: '$primary1',
   },

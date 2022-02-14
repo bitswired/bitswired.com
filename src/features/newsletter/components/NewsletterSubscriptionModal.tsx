@@ -15,7 +15,7 @@ export function NewsletterSubscriptionModal() {
     <Dialog open={isOpen} modal={false}>
       {/* <DialogTrigger>Dialog trigger</DialogTrigger> */}
       <DialogContent onPointerDownOutside={() => toggle()}>
-        <DialogTitle css={{ fontSize: '$12' }}>
+        <DialogTitle css={{ fontSize: '$7', '@bp2': { fontSize: '$12' } }}>
           Subscribe To The Newsletter
         </DialogTitle>
         {/* <DialogDescription>Dialog Content</DialogDescription> */}

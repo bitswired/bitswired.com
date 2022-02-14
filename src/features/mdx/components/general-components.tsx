@@ -1,13 +1,21 @@
 import dynamic from 'next/dynamic'
-import Image, { ImageProps } from 'next/image'
+import { ImageProps } from 'next/image'
+import { Image, AspectRatio } from '@components/core'
+
 const MDXCodeBlock = dynamic(() =>
   import('@features/mdx').then((module: any) => module.MDXCodeBlock)
 )
-Image
+
+interface FigureProps extends ImageProps {
+  ratio: number
+}
 
 export const mdxGeneralComponents = {
-  // FIXME
-  Figure: (props: ImageProps) => <Image {...props} alt="Image" />,
+  Figure: ({ ratio, ...props }: FigureProps) => (
+    <AspectRatio ratio={ratio}>
+      <Image {...props} quality={77} />
+    </AspectRatio>
+  ),
   code: MDXCodeBlock,
   // FIXME: remove as any if possible
 } as any

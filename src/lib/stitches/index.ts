@@ -44,7 +44,14 @@ export const { styled, theme, getCssText, globalCss, reset, keyframes } =
         ...secondaryScale,
         ...grayScale,
         text: '#292929',
+
         error: 'red',
+        errorBg: 'red',
+        info: '$primary1',
+        infoBg: '#c5f7dd',
+        warning: '#e15e13',
+        warningBg: '#f9d6c1',
+
         bgCode: '#EEE',
       },
       fontSizes: {
@@ -184,21 +191,6 @@ export const { styled, theme, getCssText, globalCss, reset, keyframes } =
       }),
 
       // Abbreviated padding properties
-      p: (value: Property.Padding) => ({
-        padding: value,
-      }),
-      pt: (value: Property.Padding) => ({
-        paddingTop: value,
-      }),
-      pr: (value: Property.Padding) => ({
-        paddingRight: value,
-      }),
-      pb: (value: Property.Padding) => ({
-        paddingBottom: value,
-      }),
-      pl: (value: Property.Padding) => ({
-        paddingLeft: value,
-      }),
       px: (value: Property.Padding) => ({
         paddingLeft: value,
         paddingRight: value,
