@@ -14,7 +14,6 @@ function processMeta(code: string) {
       meta[res[2]] = res[3]
     })
 
-    console.log(meta.collapsible)
     meta.collapsible = meta.collapsible === 'true' ? true : false
 
     return { code: strippedCode, meta: meta }

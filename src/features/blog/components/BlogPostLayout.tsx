@@ -22,7 +22,6 @@ interface BlogPostLayoutProps {
 }
 
 export function BlogPostLayout({ postMeta, children }: BlogPostLayoutProps) {
-  console.log(postMeta)
   return (
     <Box css={{ maxWidth: '800px', margin: 'auto', px: '1rem' }}>
       <Title>{postMeta.title}</Title>

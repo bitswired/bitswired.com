@@ -37,7 +37,6 @@ export function useNewsletterSubscriptionForm(): UseNewsletterSubscriptionFormVa
     },
     {
       onSuccess: (_, variables) => {
-        console.log(variables)
         tracker.trackNewsletterSubscriptionSuccess(variables)
       },
       onError: () => {

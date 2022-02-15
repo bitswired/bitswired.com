@@ -14,9 +14,14 @@ const fs = fsWithCallbacks.promises
 interface BlogPostPageProps {
   postMeta: BlogPostMeta
   code: string
+  data: any
 }
 
-export default function BlogPostPage({ postMeta, code }: BlogPostPageProps) {
+export default function BlogPostPage({
+  postMeta,
+  code,
+  data,
+}: BlogPostPageProps) {
   const Component = React.useMemo(() => getMDXComponent(code), [code])
 
   return (
@@ -37,7 +42,7 @@ export default function BlogPostPage({ postMeta, code }: BlogPostPageProps) {
       />
 
       <BlogPostLayout postMeta={postMeta}>
-        <Component components={mdxGeneralComponents} />
+        <Component components={mdxGeneralComponents} data={data} />
       </BlogPostLayout>
     </>
   )
@@ -50,6 +55,9 @@ async function listAllSlugs() {
 
 async function getPostBySlug(slug: string) {
   const postPath = path.join(CONFIG.paths.content.blog, slug)
+  const dataPath = path.join(CONFIG.paths.content.blog, slug, 'data.json')
+
+  const data = JSON.parse((await fs.readFile(dataPath)).toString('utf-8'))
 
   const { code, frontmatter } = await bundleMDX({
     file: path.resolve(path.join(postPath, 'index.mdx')),
@@ -71,7 +79,7 @@ async function getPostBySlug(slug: string) {
 
   const postMeta = validatePostMeta(frontmatter, slug)
 
-  return { code, postMeta }
+  return { code, postMeta, data }
 }
 
 type Context = {
@@ -83,10 +91,10 @@ type Context = {
 export async function getStaticProps(context: Context) {
   const { slug } = context.params
 
-  const { postMeta, code } = await getPostBySlug(slug)
+  const { postMeta, code, data } = await getPostBySlug(slug)
 
   return {
-    props: { postMeta, code },
+    props: { postMeta, code, data },
   }
 }
 
