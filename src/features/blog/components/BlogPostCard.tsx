@@ -42,8 +42,9 @@ const MetaContainer = styled('div', {
 })
 
 const Title = styled('p', {
-  fontSize: '$4',
+  fontSize: '$6',
   fontWeight: '$bold',
+  fontFamily: '$serif',
 
   '@bp2': {
     fontSize: '$9',
@@ -96,7 +97,9 @@ export function BlogPostCard({ postMeta }: BlogPostCardProps) {
           </InternalLink>
         </MetaRow>
 
-        {postMeta.series && <Box>Series: {postMeta.series}</Box>}
+        {postMeta.series && (
+          <Box css={{ fontSize: '$2' }}>Series: {postMeta.series}</Box>
+        )}
 
         <Box as="p" css={{ color: '$text' }}>
           {postMeta.description}

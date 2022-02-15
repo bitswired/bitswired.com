@@ -3,6 +3,7 @@ import { default as fsWithCallbacks } from 'fs'
 import path from 'path'
 import { CONFIG } from '@config'
 import { BlogPostGrid, validatePostMeta } from '@features/blog'
+import { CommonSEO } from '@features/seo'
 const fs = fsWithCallbacks.promises
 
 interface BlogPageProps {
@@ -10,7 +11,16 @@ interface BlogPageProps {
 }
 
 export default function BlogPage({ postMetas }: BlogPageProps) {
-  return <BlogPostGrid postMetas={[...postMetas, ...postMetas, ...postMetas]} />
+  return (
+    <>
+      <CommonSEO
+        title="Blog, Learn Together"
+        description="Bitswired blog. Articles about artificial intelligence, computer graphics, web development and more."
+        uri="/blog"
+      />
+      <BlogPostGrid postMetas={[...postMetas, ...postMetas, ...postMetas]} />
+    </>
+  )
 }
 
 async function listAllSlugs() {

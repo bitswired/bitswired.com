@@ -6,8 +6,10 @@ import { styled } from '@lib/stitches'
 import { Prose } from './Prose'
 
 const Title = styled('h1', {
-  fontSize: '1.75rem',
-  fontWeight: '$bold',
+  fontSize: '2rem',
+  fontWeight: '$regular',
+  fontFamily: '$serif',
+  color: '$text',
 
   '@bp2': {
     fontSize: '3rem',

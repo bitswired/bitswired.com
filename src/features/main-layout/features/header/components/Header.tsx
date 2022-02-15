@@ -6,7 +6,7 @@ import { styled } from '@lib/stitches'
 import { MobileNavigation } from './MobileNavigation'
 import { Navigation } from './Navigation'
 
-const BarWrap = styled('div', {
+const BarWrap = styled('header', {
   position: 'fixed',
   top: 0,
   left: 0,
@@ -20,11 +20,11 @@ const BarWrap = styled('div', {
   zIndex: '$1',
   overflow: 'hidden',
 
-  transition: 'height 0.3s ease',
+  transition: 'height 0.4s ease-in-out',
 
   '&[data-mobile-menu=true]': {
+    transition: 'height 0.4s ease-in-out',
     height: '100vh',
-    transition: 'height 1s ease',
   },
 })
 

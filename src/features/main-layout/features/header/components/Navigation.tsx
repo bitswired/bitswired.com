@@ -18,7 +18,7 @@ const Item = styled('a', {
 export function Navigation() {
   return (
     <Box
-      as="ul"
+      as="nav"
       css={{
         paddingInlineStart: 0,
         margin: 'auto',

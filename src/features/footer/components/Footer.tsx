@@ -42,7 +42,7 @@ const Copyright = styled('p', {
 export function Footer() {
   return (
     <>
-      <FooterContainer>
+      <FooterContainer as="footer">
         <Wireup />
         <Socials />
         <Pages />

@@ -68,6 +68,7 @@ export const Prose = styled('article', {
       color: '#888 !important',
     },
   },
+
   code: {
     p: '0.1em',
     borderRadius: '3px',
@@ -75,5 +76,11 @@ export const Prose = styled('article', {
     fontFamily: '$mono',
     //color: props.theme.colors.secondary
     color: '$primary3',
+  },
+
+  figcaption: {
+    fontSize: '1.2em',
+    textAlign: 'center',
+    fontFamily: '$serif',
   },
 })

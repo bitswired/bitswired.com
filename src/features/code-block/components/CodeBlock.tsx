@@ -83,17 +83,6 @@ export function CodeBlock({ code, language, meta }: CodeBlockProps) {
   return (
     <Highlight {...defaultProps} code={code} language={language} theme={theme}>
       {({ tokens, getLineProps, getTokenProps }) => (
-        // <Box
-        //   as="pre"
-        //   className={className}
-        //   style={style}
-        //   css={{
-        //     fontFamily: '$mono',
-        //     fontSize: '0.85em !important',
-        //     padding: '$4',
-        //     borderRadius: '$md',
-        //     backgroundColor: '$bgCode !important',
-        //   }}
         <Pre>
           {meta?.collapsible ? (
             <CollapsibleCode>

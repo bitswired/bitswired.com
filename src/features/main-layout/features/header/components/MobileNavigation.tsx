@@ -3,7 +3,7 @@ import { Navigation } from './Navigation'
 
 export function MobileNavigation() {
   return (
-    <Box>
+    <Box as="nav">
       <Navigation />
     </Box>
   )
