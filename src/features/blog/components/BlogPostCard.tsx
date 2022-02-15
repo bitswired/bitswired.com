@@ -64,12 +64,13 @@ const ImageContainer = styled(AspectRatio, {
 
 interface BlogPostCardProps {
   postMeta: BlogPostMeta
+  ratio?: number
 }
 
-export function BlogPostCard({ postMeta }: BlogPostCardProps) {
+export function BlogPostCard({ postMeta, ratio = 16 / 9 }: BlogPostCardProps) {
   return (
     <CardContainer>
-      <ImageContainer ratio={16 / 9}>
+      <ImageContainer ratio={ratio}>
         <InternalLink href={`/blog/${postMeta.slug}`} title={postMeta.title}>
           <Image
             src={postMeta.image}
@@ -98,7 +99,9 @@ export function BlogPostCard({ postMeta }: BlogPostCardProps) {
         </MetaRow>
 
         {postMeta.series && (
-          <Box css={{ fontSize: '$2' }}>Series: {postMeta.series}</Box>
+          <Box css={{ fontSize: '$2', color: '$text' }}>
+            Series: {postMeta.series}
+          </Box>
         )}
 
         <Box as="p" css={{ color: '$text' }}>

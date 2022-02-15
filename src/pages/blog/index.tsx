@@ -18,7 +18,7 @@ export default function BlogPage({ postMetas }: BlogPageProps) {
         description="Bitswired blog. Articles about artificial intelligence, computer graphics, web development and more."
         uri="/blog"
       />
-      <BlogPostGrid postMetas={[...postMetas, ...postMetas, ...postMetas]} />
+      <BlogPostGrid postMetas={postMetas} />
     </>
   )
 }

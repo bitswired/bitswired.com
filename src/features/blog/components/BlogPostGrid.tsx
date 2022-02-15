@@ -17,7 +17,7 @@ const Grid = styled('div', {
   },
 
   '@bp2': {
-    padding: '$8',
+    padding: '$11',
   },
 })
 
