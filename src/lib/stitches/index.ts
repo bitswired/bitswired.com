@@ -221,15 +221,13 @@ export const { styled, theme, getCssText, globalCss, reset, keyframes } =
 export const globalStyles = globalCss({
   'html,body': {
     width: '100%',
-    overflowX: 'hidden',
+    overflowX: 'clip',
   },
 
   body: {
     fontFamily: '$sans',
 
     margin: 0,
-
-    overflowX: 'hidden',
 
     '@bp1': {
       fontSize: '16px',

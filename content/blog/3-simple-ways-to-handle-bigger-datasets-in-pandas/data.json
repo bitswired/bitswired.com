@@ -1,0 +1,18 @@
+{
+  "noOpti": {
+    "size": 131.36,
+    "improvement": 0
+  },
+  "opti1": {
+    "size": 128.62,
+    "improvement": 2.09
+  },
+  "opti2": {
+    "size": 42.54,
+    "improvement": 67.61
+  },
+  "opti3": {
+    "size": 3.39,
+    "improvement": 97.42
+  }
+}

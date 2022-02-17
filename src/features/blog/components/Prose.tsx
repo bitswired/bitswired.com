@@ -1,7 +1,6 @@
 import { styled } from '@lib/stitches'
 
 export const Prose = styled('article', {
-  maxWidth: '800px',
   margin: 'auto',
   fontFamily: '$sans',
 

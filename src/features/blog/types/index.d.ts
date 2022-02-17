@@ -13,3 +13,8 @@ interface BlogPostMeta {
   dateModified: string
   images: string[]
 }
+
+interface TocEntry {
+  depth: number
+  value: string
+}

@@ -1,52 +1,10 @@
-import { FaChevronRight } from 'react-icons/fa'
-import {
-  AspectRatio,
-  Box,
-  Avatar,
-  Image,
-  InternalLink,
-  Icon,
-} from '@components/core'
-import { CONFIG } from '@config'
+import React from 'react'
+import { AspectRatio, Box, Image } from '@components/core'
 import { styled } from '@lib/stitches'
+import { MetaZone } from './MetaZone'
+import { Navigation } from './Navigation'
 import { Prose } from './Prose'
-
-interface NavigationProps {
-  postMeta: BlogPostMeta
-}
-
-function Navigation({ postMeta }: NavigationProps) {
-  return (
-    <Box
-      css={{
-        display: 'flex',
-        gap: '$2',
-        alignItems: 'center',
-        my: '2.5em',
-      }}
-    >
-      <InternalLink href="/blog" title="Go back to blog">
-        Blog
-      </InternalLink>
-
-      <Icon icon={<FaChevronRight />} css={{ marginBottom: '-8px' }} />
-
-      <InternalLink href="/blog" title="Go back to blog categories">
-        {postMeta.category}
-      </InternalLink>
-
-      {postMeta.series && (
-        <>
-          <Icon icon={<FaChevronRight />} css={{ marginBottom: '-8px' }} />
-
-          <InternalLink href="/blog" title="Go back to blog series">
-            {postMeta.series}
-          </InternalLink>
-        </>
-      )}
-    </Box>
-  )
-}
+import { Toc } from './Toc'
 
 const Title = styled('h1', {
   fontSize: '2rem',
@@ -62,31 +20,83 @@ const Title = styled('h1', {
 interface BlogPostLayoutProps {
   postMeta: BlogPostMeta
   children: JSX.Element
+  toc: any
 }
 
-export function BlogPostLayout({ postMeta, children }: BlogPostLayoutProps) {
+export function BlogPostLayout({
+  postMeta,
+  children,
+  toc,
+}: BlogPostLayoutProps) {
   return (
-    <Box css={{ maxWidth: '800px', margin: 'auto', px: '1rem' }}>
-      <Navigation postMeta={postMeta} />
+    <Box
+      css={{
+        display: 'grid',
+        justifyContent: 'center',
+        margin: 'auto',
+        px: '1rem',
+        columnGap: '2rem',
+        // gridTemplateColumns: '1fr 2fr',
+        gridTemplateAreas: '"main" "meta" "toc" "prose" ',
 
-      <Title>{postMeta.title}</Title>
-      {/* <Box css={{ width: 300 }}> */}
-      <AspectRatio ratio={16 / 9}>
-        <Image
-          src={postMeta.image}
-          layout="fill"
-          sizes="(max-width: 600px) 300px, 600px"
-          quality={50}
-          alt={postMeta.title}
-          priority
-        />
-      </AspectRatio>
+        '@media (min-width: 1000px)': {
+          gridTemplateAreas: '"toc main main meta" "toc prose prose meta"',
+          justifyContent: 'start',
+        },
+      }}
+    >
+      <Box
+        css={{
+          gridArea: 'toc',
+          maxWidth: '800px',
+        }}
+      >
+        <Box css={{ position: 'sticky', top: '150px' }}>
+          <Toc toc={toc} />
+        </Box>
+      </Box>
 
-      <Avatar size="lg" src={CONFIG.images.me} alt="me" />
-      <Avatar size="md" src={CONFIG.images.me} alt="me" />
-      <Avatar size="sm" src={CONFIG.images.me} alt="me" />
+      <Box
+        css={{
+          gridArea: 'meta',
+          maxWidth: '800px',
+        }}
+      >
+        <Box css={{ position: 'sticky', top: '150px' }}>
+          <MetaZone postMeta={postMeta} />
+        </Box>
+      </Box>
 
-      <Prose>{children}</Prose>
+      <Box
+        css={{
+          gridArea: 'main',
+          maxWidth: '900px',
+        }}
+      >
+        <Navigation postMeta={postMeta} />
+
+        <Title>{postMeta.title}</Title>
+
+        <AspectRatio ratio={16 / 9}>
+          <Image
+            src={postMeta.image}
+            layout="fill"
+            sizes="(max-width: 600px) 300px, 600px"
+            quality={50}
+            alt={postMeta.title}
+            priority
+          />
+        </AspectRatio>
+      </Box>
+
+      <Box
+        css={{
+          gridArea: 'prose',
+          maxWidth: '900px',
+        }}
+      >
+        <Prose>{children}</Prose>
+      </Box>
     </Box>
   )
 }

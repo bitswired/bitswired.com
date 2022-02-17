@@ -23,6 +23,25 @@ export const ColoredBlock = styled('div', {
   },
 })
 
-export const SummaryBlock = styled('div', {
-  backgroundColor: '$primary1',
+const SummaryBlockContainer = styled('div', {
+  background: 'linear-gradient(to bottom, $primary1, white)',
+  py: '0.5rem',
+  px: '1.5rem',
+  borderRadius: '$md',
+  boxShadow: '$lg',
+  my: '1rem',
 })
+
+const SummaryTitle = styled('p', {
+  fontSize: '2.5rem !important',
+  my: '0.5em !important',
+})
+
+export function SummaryBlock({ children }) {
+  return (
+    <SummaryBlockContainer>
+      <SummaryTitle>TLDR</SummaryTitle>
+      {children}
+    </SummaryBlockContainer>
+  )
+}

@@ -1,5 +1,5 @@
 import { bundleMDX } from 'mdx-bundler'
-import { getMDXComponent } from 'mdx-bundler/client'
+import { getMDXExport } from 'mdx-bundler/client'
 import React from 'react'
 import rehypeMathjax from 'rehype-mathjax'
 import remarkMath from 'remark-math'
@@ -9,6 +9,7 @@ import { CONFIG } from '@config'
 import { BlogPostLayout, validatePostMeta } from '@features/blog'
 import { mdxGeneralComponents } from '@features/mdx'
 import { BlogPostingJSONLD, CommonSEO } from '@features/seo'
+import { plugin, rehypeToc } from '@lib/mdx/testPlugin'
 const fs = fsWithCallbacks.promises
 
 interface BlogPostPageProps {
@@ -22,7 +23,9 @@ export default function BlogPostPage({
   code,
   data,
 }: BlogPostPageProps) {
-  const Component = React.useMemo(() => getMDXComponent(code), [code])
+  const mdxExport = getMDXExport(code)
+
+  const Component = React.useMemo(() => mdxExport.default, [code])
 
   return (
     <>
@@ -41,7 +44,7 @@ export default function BlogPostPage({
         image={postMeta.images}
       />
 
-      <BlogPostLayout postMeta={postMeta}>
+      <BlogPostLayout postMeta={postMeta} toc={mdxExport.toc}>
         <Component components={mdxGeneralComponents} data={data} />
       </BlogPostLayout>
     </>
@@ -67,12 +70,21 @@ async function getPostBySlug(slug: string) {
       // options.minify = false
       options.target = ['esnext']
       options.platform = 'node'
+      options.treeShaking = true
 
       return options
     },
     xdmOptions(options) {
-      options.remarkPlugins = [...(options.remarkPlugins ?? []), remarkMath]
-      options.rehypePlugins = [...(options.rehypePlugins ?? []), rehypeMathjax]
+      options.remarkPlugins = [
+        ...(options.remarkPlugins ?? []),
+        remarkMath,
+        plugin,
+      ]
+      options.rehypePlugins = [
+        ...(options.rehypePlugins ?? []),
+        rehypeMathjax,
+        rehypeToc,
+      ]
       return options
     },
   })

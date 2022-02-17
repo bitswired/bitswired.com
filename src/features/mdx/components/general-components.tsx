@@ -1,10 +1,25 @@
 import dynamic from 'next/dynamic'
 import { ImageProps } from 'next/image'
-import { Image, AspectRatio, Box } from '@components/core'
+import React from 'react'
+import {
+  Image,
+  AspectRatio,
+  Box,
+  InternalLink,
+  ExternalLink,
+} from '@components/core'
 
 const MDXCodeBlock = dynamic(() =>
   import('@features/mdx').then((module: any) => module.MDXCodeBlock)
 )
+
+function MDXLink({ children, ...props }: React.HTMLProps<HTMLLinkElement>) {
+  if (props.href?.startsWith('/')) {
+    return <InternalLink {...props}>{children}</InternalLink>
+  } else {
+    return <ExternalLink {...props}>{children}</ExternalLink>
+  }
+}
 
 interface FigureProps extends ImageProps {
   ratio: number
@@ -30,5 +45,6 @@ export const mdxGeneralComponents = {
     </Box>
   ),
   code: MDXCodeBlock,
+  a: MDXLink,
   // FIXME: remove as any if possible
 } as any

@@ -60,6 +60,7 @@ const MetaRow = styled('div', {
 
 const ImageContainer = styled(AspectRatio, {
   overflow: 'hidden',
+  padding: '100px',
 })
 
 interface BlogPostCardProps {
@@ -104,7 +105,14 @@ export function BlogPostCard({ postMeta, ratio = 16 / 9 }: BlogPostCardProps) {
           </Box>
         )}
 
-        <Box as="p" css={{ color: '$text' }}>
+        <Box
+          as="p"
+          css={{
+            color: '$text',
+            height: '3em',
+            overflow: 'hidden',
+          }}
+        >
           {postMeta.description}
         </Box>
       </MetaContainer>

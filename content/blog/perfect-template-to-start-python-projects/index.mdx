@@ -1,0 +1,252 @@
+---
+id: 0
+title: 'Perfect Template To Start Python Projects'
+description:
+  'Python is great but lacks structure. I detail the issues and provide a GitHub
+  template repository to solve the issue.'
+readMinutes: 20
+image: '/blog/0/cover.png'
+category: 'Programming'
+tags: ['Python', 'Template', 'Best-Practices']
+slug: 'perfect-template-to-start-python-projects'
+published: true
+datePublished: '2022-01-06'
+dateModified: '2022-01-06'
+images: ['https://statics.bitswired.com/images-opti/blog/0/cover.webp']
+---
+
+import { Button } from '@components/core'
+
+<Button>JDID</Button>
+
+**TLDR** - _Python is a great language with a lot of libraries available. From
+gaming to artificial intelligence, even backend or automation. There is one main
+catch, the lack of structure and easy mess due to the dynamic types. In this
+article, I identify all these problems and give you a solution for each.
+Finally, I share with you a Github template repository to **start your new
+Python projects on the right foot, and ship high-quality code in no time**!_
+
+Check the repository at:
+[https://github.com/bitswired/perfect-python-starter][github repo].<br/> Let a
+star if the repo helps you!
+
+## Introduction
+
+Working as a machine learning engineer, Python is one of my daily tools. It's an
+expressive language, fast to write and it has one of the richest ecosystems, not
+to mention that most of the tools to build artificial intelligence are available
+in Python. However, I would identify 2 main drawbacks which can undermine your
+productivity and code robustness: the **lack of structure** (dynamic types) and
+the **lack of built-in code quality tools**.
+
+## Issue 1: Dependency Management
+
+### Problem
+
+Installing third-party libraries is an essential step in any programming
+project. But it's not enough. It should be possible to version control the
+library you use and install the project with all its dependencies on any
+computer. You also want isolation to avoid mixing dependencies between different
+projects. Indeed if you have different projects depending on the same library
+but with a different version, you don't want them to conflict with each other.
+
+The standard way to tackle these problems in Python are **Pypi** (to install
+packages) and **virtual environments** (for isolation). The typical workflow is:
+
+1. You create a folder for your project
+2. Create a virtual environment
+3. Install dependencies with pip
+4. Store the dependencies list in a file, `requirements.txt` using `pip freeze`
+
+This provides you:
+
+- **Isolation**: packages installed in the virtual environment are isolated from
+  the rest of the system
+- **Reproducibility (somehow)**: you can reinstall all the dependencies when you
+  download the project, but you are not guaranteed to reach the same state at
+  another point in time
+
+2 problems remain:
+
+- **Dependency mix**: you get a `requirements.txt` file mixed with your
+  dependencies as well as packages required by these dependencies. It's a mess
+  to track easily the packages you really depend on
+- **Week reproducibility**: you are not guaranteed to reach the same project
+  dependencies state if you reinstall your project later because `pip freeze`
+  does not lock dependencies
+
+### Solution
+
+Use another package manager: [Poetry][poetry]. It's a modern package manager and
+builder. It's really simple from a utilization point. All you need to provide is
+one file: the `pyproject.toml` file. It solves the 2 problems mentioned above.
+
+- **Clean dependencies**: in your `pyproject.toml` file you only specify the
+  direct dependency for your project. It will never get mixed with dependency
+  from other packages
+- **Strong reproducibility**: poetry introduces a **lock file** `poetry.lock` to
+  your project. In this file, all dependencies are locked to the version
+  resolved at the installation. You are guaranteed to have the same dependency
+  state for your project whenever you're installing it
+
+## Issue 2: Code Quality and CI/CD
+
+### Problem
+
+Great, we solved the dependency management issue! But what about enforcing code
+quality in your project? With statically typed language like Rust, or Java, the
+compiler catches a lot of issues for you at the compilation time. Unfortunately,
+we don't have this luxury in our beloved dynamically typed language.
+
+Another important factor in a good codebase is **consistency**. Python does not
+come with a default code formatter, but we need to somehow enforce good
+formatting practices and ideally, we want it to be automatic.
+
+### Solution
+
+A good solution here covers 5 points.
+
+#### 1. Static Type Checking
+
+Python introduced type-annotation around 3.5. There are some great tools built
+around this type's annotation feature. Remember that type-annotations are not
+enforced in Python, it's an optional feature, you can run your code even if the
+annotations are wrong or not respected. To do the actual type checking and
+verify that our code is correct at compilation time we will use **Mypy**. It's a
+static type checker built for python. If you come from statically typed
+languages, compiler checks miss you to catch a lot of potential bugs. Mypy will
+force you to spend a bit of time writing and conforming to type-annotations, but
+this investment will pay sooner than you can think.
+
+#### 2. Formatting
+
+To format python code, my favorite tools are **Black** and **Isort**. They come
+with a predefined set of rules which are a great default and you can easily
+customize them in the `pyproject.toml` configuration. Black will help you format
+your code, i.e., breaking too-long lines, enforcing newlines between functions,
+and so on. Isort will help you keep your imports sorted with separation between
+python built-ins, first-party and third-party dependencies. It's better to keep
+it consistent across all files in your project.
+
+<Figure
+  ratio={16 / 9}
+  width="100%"
+  maxWidth="500px"
+  src="https://statics.bitswired.com/images-opti/blog/python-formatting-before-after.webp"
+  alt="before and after code formatting"
+  title="Before/after code formatting"
+  objectFit="contain !important"
+/>
+
+#### 3. Linting
+
+Linting is another code quality tool. It checks your code against a huge list of
+rules and will tell you which one you break. Rules like no unused variables,
+duplicated names, wrong inheritance, ... It is important for your project's
+health. There is a lot of linters available like Pylint, Flake8, Autopep ... I
+personally use **Flake8**.
+
+#### 4. Testing
+
+Python has native support for unit tests. However, I encourage you to use Pylint
+which is a powerful tool to write test with features that makes your life
+easier, especially the powerful fixture. I might come back to Pytest in another
+article.
+
+#### 5. CI/CD
+
+Most likely, you are using a tool like GitHub to save your git repository
+remotely. Ideally, you want to run all your code quality checks before any code
+is merged to your master branch to avoid codebase deterioration over time. We
+have 2 complementary ways to do it:
+
+1. Pre-commit hooks: these are scripts run before each commit locally, they will
+   run all your code quality tools and deny the commit if the code doesn't pass.
+   This is an easy way to enforce best practices at every commi width: string;
+2. GitHub actions: these are scripts run automatically by GitHub on certain
+   triggers. For instance, when you **open a pull request**, GitHub will build
+   your code in a container and run all your code checks. It will prevent you to
+   merge the pull request into master if the checks did not pass
+
+Using a combination of both is the recommended way. Indeed pre-commit hooks are
+fast since they run locally, you don't need to wait for GitHub remotely.
+However, nothing guarantees you that every developer runs the pre-commit hooks
+before pushing code. So having the GitHub actions checking your code is the
+ultimate guarantee that all code merged on master lives up to your quality
+standards.
+
+In the solution proposed here, I use a Python library `pre-commit` to
+automatically run all the checking tools before each commit. Finally, I set up a
+GitHub action to run pre-commit before merging a pull request into master to
+ultimately enforce the code qualtiy.
+
+## Issue 3: Packaging
+
+### Problem
+
+Awesome, you have a project ready to be packaged and published to pipy! But
+wait, you first need to get it publish-ready and go through a list of steps that
+can be cumbersome ([see here][packaging]).
+
+### Solution
+
+Again poetry helps us there. It's super simple to build your package and publish
+it. You mainly have 2 commands to use: `poetry build` and `poetry publish`.
+Never be afraid to publish your package.
+
+## Bonus: VSCode Integration
+
+If you are using VSCode, there is an awesome Python language server called
+**Pylance**. It will statically check your code as you type, improve code
+clarity with enhanced colorization. I encourage you to enable this feature for
+all your projects. You can control the level of severity for the type checking,
+so you can adopt it progressively. It will catch tons of potential errors in
+your code just by checking the types.
+
+Also, for all the tools mentioned before, Mypy, Black, Isort, and Flake8, there
+are **plugins** available in the VSCode marketplace.
+
+Finally, to **integrate Poetry and VScode smoothly**, you need to tell VSCode
+the location of your Python interpreter. Since Poetry manages it for you, run
+`poetry run which python` to get the absolute path. Then in VSCode press Ctrl+P,
+type Select Python interpreter, and put the path.
+
+## The Best Python Template To Start
+
+Implementing all these good practices can feel too demanding especially if you
+are a beginner. However, I encourage you to apply these good practices as
+**early** as possible in your coding habits. It will overall make you a better
+coder, produce better quality code, and avoid easy-to-catch pitfalls and bugs.
+Even for an advanced programmer, it can be cumbersome to do it again and again
+for every project.
+
+_Setting up these tools is not the most exciting part, but a necessary step
+toward success._
+
+So I've made your life easier! I created a [GitHub template
+repository][github repo] addressing all the issues. It's **easy to use**, when
+you create a new Python project, start it from my GitHub template. You will only
+have to run poetry install to get all the dev dependencies required for the
+tooling: **linting**, **formatting**, **type checking**. You will also have
+**poetry** to handle your dependencies and **be ready to ship high-quality code
+in no time!** Check it out.
+
+<Figure
+  ratio={1}
+  width="100%"
+  maxWidth="600px"
+  src="https://statics.bitswired.com/videos/blog/python-perfect-template-use.gif"
+  alt="how to use my project template"
+  title="How to create a new repository from the template"
+  objectFit="contain !important"
+  responsive={false}
+/>
+
+```js
+import cool from 'jdid'
+const x () => 3
+```
+
+[github repo]: https://github.com/bitswired/perfect-python-starter
+[packaging]: https://packaging.python.org/tutorials/packaging-projects/
+[poetry]: https://github.com/python-poetry/poetry
