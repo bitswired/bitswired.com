@@ -1,9 +1,10 @@
 import { Image, AspectRatio, Box, Button, InternalLink } from '@components/core'
 import { styled } from '@lib/stitches'
 
-const CardContainer = styled('div', {
+const CardContainer = styled('article', {
   display: 'flex',
   flexDirection: 'column',
+  borderRadius: '$lg',
 
   gap: '$2',
 
@@ -44,7 +45,7 @@ const MetaContainer = styled('div', {
 const Title = styled('p', {
   fontSize: '$6',
   fontWeight: '$bold',
-  fontFamily: '$serif',
+  fontFamily: '$sans',
 
   '@bp2': {
     fontSize: '$9',
@@ -60,7 +61,7 @@ const MetaRow = styled('div', {
 
 const ImageContainer = styled(AspectRatio, {
   overflow: 'hidden',
-  padding: '100px',
+  borderRadius: '$lg $lg 0 0',
 })
 
 interface BlogPostCardProps {

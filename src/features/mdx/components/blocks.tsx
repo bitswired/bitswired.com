@@ -37,7 +37,11 @@ const SummaryTitle = styled('p', {
   my: '0.5em !important',
 })
 
-export function SummaryBlock({ children }) {
+interface SummaryBlockProps {
+  children: JSX.Element
+}
+
+export function SummaryBlock({ children }: SummaryBlockProps) {
   return (
     <SummaryBlockContainer>
       <SummaryTitle>TLDR</SummaryTitle>

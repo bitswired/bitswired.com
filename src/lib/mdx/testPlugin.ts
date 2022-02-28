@@ -3,8 +3,14 @@ import { mdxFromMarkdown } from 'mdast-util-mdx'
 import { mdxjs } from 'micromark-extension-mdxjs'
 import { visit } from 'unist-util-visit'
 
-export const plugin = () => (tree, file) => {
-  const headingNodes = []
+export interface TocEntry {
+  depth: number
+  value: string
+}
+
+export const remarkToc = () => (tree: any) => {
+  const headingNodes: TocEntry[] = []
+
   visit(tree, 'heading', (headingNode) => {
     const x = {
       depth: headingNode.depth - 1,
@@ -27,13 +33,12 @@ export const plugin = () => (tree, file) => {
   )
   const nn = tt.children[0]
   tree.children.push(nn)
-  //   console.log(tree)
 }
 
-export const rehypeToc = () => (tree, file) => {
+export const rehypeToc = () => (tree: any) => {
   visit(
     tree,
-    (x) => x.tagName && ['h2', 'h3', 'h4'].includes(x.tagName),
+    (x: any) => x.tagName && ['h2', 'h3', 'h4'].includes(x.tagName),
     (headingNode) => {
       console.log(headingNode.children[0].value)
       headingNode.properties.id = headingNode.children[0].value

@@ -7,13 +7,14 @@ import {
   Box,
   InternalLink,
   ExternalLink,
+  LinkProps,
 } from '@components/core'
 
 const MDXCodeBlock = dynamic(() =>
   import('@features/mdx').then((module: any) => module.MDXCodeBlock)
 )
 
-function MDXLink({ children, ...props }: React.HTMLProps<HTMLLinkElement>) {
+function MDXLink({ children, ...props }: LinkProps) {
   if (props.href?.startsWith('/')) {
     return <InternalLink {...props}>{children}</InternalLink>
   } else {

@@ -9,7 +9,7 @@ import { CONFIG } from '@config'
 import { BlogPostLayout, validatePostMeta } from '@features/blog'
 import { mdxGeneralComponents } from '@features/mdx'
 import { BlogPostingJSONLD, CommonSEO } from '@features/seo'
-import { plugin, rehypeToc } from '@lib/mdx/testPlugin'
+import { remarkToc, rehypeToc, TocEntry } from '@lib/mdx/testPlugin'
 const fs = fsWithCallbacks.promises
 
 interface BlogPostPageProps {
@@ -18,12 +18,16 @@ interface BlogPostPageProps {
   data: any
 }
 
+interface MDXExports {
+  toc: TocEntry[]
+}
+
 export default function BlogPostPage({
   postMeta,
   code,
   data,
 }: BlogPostPageProps) {
-  const mdxExport = getMDXExport(code)
+  const mdxExport = getMDXExport<MDXExports, BlogPostMeta>(code)
 
   const Component = React.useMemo(() => mdxExport.default, [code])
 
@@ -78,7 +82,7 @@ async function getPostBySlug(slug: string) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
         remarkMath,
-        plugin,
+        remarkToc,
       ]
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),

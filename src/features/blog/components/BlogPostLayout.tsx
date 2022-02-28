@@ -9,7 +9,7 @@ import { Toc } from './Toc'
 const Title = styled('h1', {
   fontSize: '2rem',
   fontWeight: '$regular',
-  fontFamily: '$serif',
+  fontFamily: '$sans',
   color: '$text',
 
   '@bp2': {
@@ -29,73 +29,96 @@ export function BlogPostLayout({
   toc,
 }: BlogPostLayoutProps) {
   return (
-    <Box
-      css={{
-        display: 'grid',
-        justifyContent: 'center',
-        margin: 'auto',
-        px: '1rem',
-        columnGap: '2rem',
-        // gridTemplateColumns: '1fr 2fr',
-        gridTemplateAreas: '"main" "meta" "toc" "prose" ',
-
-        '@media (min-width: 1000px)': {
-          gridTemplateAreas: '"toc main main meta" "toc prose prose meta"',
-          justifyContent: 'start',
-        },
-      }}
-    >
+    <Box css={{ display: 'flex', justifyContent: 'center' }}>
       <Box
+        as="article"
         css={{
-          gridArea: 'toc',
-          maxWidth: '800px',
+          display: 'inline-grid',
+          margin: 'auto',
+          justifyContent: 'center',
+          px: '1rem',
+          columnGap: '4rem',
+          gridTemplateAreas: '"main" "meta" "toc" "prose" ',
+
+          '@media (min-width: 1000px)': {
+            gridTemplateAreas: '"main aside" "prose aside"',
+            justifyContent: 'start',
+          },
         }}
       >
-        <Box css={{ position: 'sticky', top: '150px' }}>
-          <Toc toc={toc} />
+        <Box
+          css={{
+            gridArea: 'aside',
+            '@media (max-width: 1000px)': {
+              display: 'none',
+            },
+          }}
+        >
+          <Box
+            as="div"
+            css={{ position: 'sticky', top: '150px', width: 'max-content' }}
+          >
+            <Toc toc={toc} />
+            <MetaZone postMeta={postMeta} />
+          </Box>
         </Box>
-      </Box>
 
-      <Box
-        css={{
-          gridArea: 'meta',
-          maxWidth: '800px',
-        }}
-      >
-        <Box css={{ position: 'sticky', top: '150px' }}>
-          <MetaZone postMeta={postMeta} />
+        <Box
+          css={{
+            gridArea: 'toc',
+            '@media (min-width: 1000px)': {
+              display: 'none',
+            },
+          }}
+        >
+          <Box css={{ position: 'sticky', top: '150px' }}>
+            <Toc toc={toc} />
+          </Box>
         </Box>
-      </Box>
 
-      <Box
-        css={{
-          gridArea: 'main',
-          maxWidth: '900px',
-        }}
-      >
-        <Navigation postMeta={postMeta} />
+        <Box
+          css={{
+            gridArea: 'meta',
+            '@media (min-width: 1000px)': {
+              display: 'none',
+            },
+          }}
+        >
+          <Box css={{ position: 'sticky', top: '150px' }}>
+            <MetaZone postMeta={postMeta} />
+          </Box>
+        </Box>
 
-        <Title>{postMeta.title}</Title>
+        <Box
+          css={{
+            gridArea: 'main',
+            maxWidth: '900px',
+          }}
+        >
+          <Navigation postMeta={postMeta} />
 
-        <AspectRatio ratio={16 / 9}>
-          <Image
-            src={postMeta.image}
-            layout="fill"
-            sizes="(max-width: 600px) 300px, 600px"
-            quality={50}
-            alt={postMeta.title}
-            priority
-          />
-        </AspectRatio>
-      </Box>
+          <Title>{postMeta.title}</Title>
 
-      <Box
-        css={{
-          gridArea: 'prose',
-          maxWidth: '900px',
-        }}
-      >
-        <Prose>{children}</Prose>
+          <AspectRatio ratio={16 / 9}>
+            <Image
+              src={postMeta.image}
+              layout="fill"
+              sizes="(max-width: 600px) 300px, 600px"
+              quality={50}
+              alt={postMeta.title}
+              priority
+            />
+          </AspectRatio>
+        </Box>
+
+        <Box
+          css={{
+            gridArea: 'prose',
+            maxWidth: '900px',
+          }}
+        >
+          <Prose>{children}</Prose>
+        </Box>
       </Box>
     </Box>
   )

@@ -1,5 +1,6 @@
 import { Property } from '@stitches/react/types/css'
 import Link from 'next/link'
+import React from 'react'
 import { styled } from '@lib/stitches'
 
 const StyledLink = styled('a', {
@@ -26,10 +27,10 @@ const StyledLink = styled('a', {
 
 type LinkVariant = 'raw' | 'underlined'
 
-interface LinkProps {
+export interface LinkProps {
   href: string
   title: string
-  children: string | JSX.Element
+  children: React.ReactNode
   variant?: LinkVariant
   color?: Property.Color
 }
