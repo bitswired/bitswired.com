@@ -15,16 +15,16 @@ dateModified: '2022-01-06'
 images: ['https://statics.bitswired.com/images-opti/blog/0/cover.webp']
 ---
 
-import { Button } from '@components/core'
+import { SummaryBlock } from '@features/mdx'
 
-<Button>JDID</Button>
-
-**TLDR** - _Python is a great language with a lot of libraries available. From
-gaming to artificial intelligence, even backend or automation. There is one main
-catch, the lack of structure and easy mess due to the dynamic types. In this
-article, I identify all these problems and give you a solution for each.
-Finally, I share with you a Github template repository to **start your new
-Python projects on the right foot, and ship high-quality code in no time**!_
+<SummaryBlock>
+  Python is a great language with a lot of libraries available. From gaming to
+  artificial intelligence, even backend or automation. There is one main catch,
+  the lack of structure and easy mess due to the dynamic types. In this article,
+  I identify all these problems and give you a solution for each. Finally, I
+  share with you a Github template repository to **start your new Python
+  projects on the right foot, and ship high-quality code in no time**!
+</SummaryBlock>
 
 Check the repository at:
 [https://github.com/bitswired/perfect-python-starter][github repo].<br/> Let a
@@ -130,12 +130,11 @@ it consistent across all files in your project.
 
 <Figure
   ratio={16 / 9}
-  width="100%"
-  maxWidth="500px"
-  src="https://statics.bitswired.com/images-opti/blog/python-formatting-before-after.webp"
+  layout="fill"
+  objectFit="contain"
+  src="/blog/0/python-formatting-before-after.gif"
   alt="before and after code formatting"
   title="Before/after code formatting"
-  objectFit="contain !important"
 />
 
 #### 3. Linting
@@ -232,20 +231,13 @@ tooling: **linting**, **formatting**, **type checking**. You will also have
 in no time!** Check it out.
 
 <Figure
-  ratio={1}
-  width="100%"
-  maxWidth="600px"
-  src="https://statics.bitswired.com/videos/blog/python-perfect-template-use.gif"
+  ratio={4 / 3}
+  layout="fill"
+  objectFit="contain"
+  src="/blog/0/python-perfect-template-use.gif"
   alt="how to use my project template"
   title="How to create a new repository from the template"
-  objectFit="contain !important"
-  responsive={false}
 />
-
-```js
-import cool from 'jdid'
-const x () => 3
-```
 
 [github repo]: https://github.com/bitswired/perfect-python-starter
 [packaging]: https://packaging.python.org/tutorials/packaging-projects/

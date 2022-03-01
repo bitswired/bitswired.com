@@ -34,10 +34,19 @@ export function MetaZone({ postMeta }: MetaZoneProps) {
           <Box as="div" css={{ fontWeight: '$bold' }}>
             Jimi Vaubien
           </Box>
-          <Box as="div">Machine Learning Engineer</Box>
+          <Box css={{ fontSize: '$2' }} as="div">
+            Machine Learning Engineer
+          </Box>
         </Box>
       </Box>
-      <Box css={{ display: 'flex', alignItems: 'center', gap: '$4' }}>
+      <Box
+        css={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '$4',
+          fontSize: '$2',
+        }}
+      >
         <Box as="div">{postMeta.readMinutes} min</Box>{' '}
         <Box as="div">{postMeta.datePublished}</Box>
         <NewsltetterSubscriptionModalOpener>

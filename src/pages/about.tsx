@@ -7,7 +7,7 @@ const Section = styled('section', {
   margin: 'auto',
   boxSizing: 'border-box',
 
-  p: '$space$5',
+  padding: '$7',
 
   h1: {
     fontFamily: '$sans',

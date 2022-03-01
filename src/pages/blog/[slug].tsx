@@ -9,7 +9,7 @@ import { CONFIG } from '@config'
 import { BlogPostLayout, validatePostMeta } from '@features/blog'
 import { mdxGeneralComponents } from '@features/mdx'
 import { BlogPostingJSONLD, CommonSEO } from '@features/seo'
-import { remarkToc, rehypeToc, TocEntry } from '@lib/mdx/testPlugin'
+import { remarkToc, rehypeToc, TocEntry } from '@lib/mdx/toc-plugins'
 const fs = fsWithCallbacks.promises
 
 interface BlogPostPageProps {

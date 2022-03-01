@@ -24,6 +24,11 @@ const TocEntry = styled('a', {
         fontSize: '1rem',
         marginBottom: '0.2rem',
       },
+      depth3: {
+        paddingLeft: '1.5rem',
+        fontSize: '0.8rem',
+        marginBottom: '0.1rem',
+      },
     },
   },
 })

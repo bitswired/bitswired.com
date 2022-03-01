@@ -6,8 +6,13 @@ import { useNewsletterSubscriptionForm } from '../hooks/newsletter-subscription-
 
 const StyledForm = styled('form', {
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
   gap: '$4',
+
+  '@bp1': {
+    flexDirection: 'row',
+  },
 })
 
 export function NewsletterSubscriptionForm() {

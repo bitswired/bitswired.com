@@ -25,6 +25,7 @@ function MDXLink({ children, ...props }: LinkProps) {
 interface FigureProps extends ImageProps {
   ratio: number
   title: string
+  src: string
 }
 
 export const mdxGeneralComponents = {

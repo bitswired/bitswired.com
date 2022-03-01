@@ -70,6 +70,7 @@ export const Prose = styled('article', {
 
   code: {
     p: '0.1em',
+    px: '0.2em',
     borderRadius: '3px',
     backgroundColor: '#DDD',
     fontFamily: '$mono',

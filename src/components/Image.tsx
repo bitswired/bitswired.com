@@ -1,6 +1,10 @@
 import NextImage, { ImageProps } from 'next/image'
 import { loader } from '@lib/next'
 
-export function Image(props: Omit<ImageProps, 'loader'>) {
+interface IImageProps extends Omit<ImageProps, 'loader'> {
+  src: string
+}
+
+export function Image(props: IImageProps) {
   return <NextImage loader={loader} {...props} />
 }
