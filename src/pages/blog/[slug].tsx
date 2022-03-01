@@ -75,6 +75,10 @@ async function getPostBySlug(slug: string) {
       options.target = ['esnext']
       options.platform = 'node'
       options.treeShaking = true
+      // FIXME: understand issue with process not defined for some mdx pages
+      options.define = {
+        'process.env': '142',
+      }
 
       return options
     },

@@ -1,0 +1,204 @@
+---
+id: 1
+title: 1 line to cache slow functions and speed up your Python script
+description: >-
+  Easily squeeze performance out of your scripts, with only slight
+  modifications. Learn how to leverage caching easily in Python.
+readMinutes: 10
+image: '/blog/1/cover.png'
+category: Programming
+series: Bits of Python
+tags:
+  - Python
+  - Caching
+slug: 1-line-to-cache-slow-functions-and-speed-up-your-python-script
+published: true
+datePublished: '2022-01-06'
+dateModified: '2022-01-06'
+images:
+  - 'https://statics.bitswired.com/images-opti/blog/1/cover.webp'
+---
+
+import { SummaryBlock, ColoredBlock, LinearLogLineChart } from '@features/mdx'
+
+<SummaryBlock>
+  In a nutshell: caching is an easy way to improve performance when costly
+  computations can be reused. You can implement it easily in Python using @cache
+  and @lru_cache decorators
+</SummaryBlock>
+
+Find the code related to this _Bits of ..._ [on GitHub][github repo].
+
+## Concept
+
+Caching is a simple technique to speedup your code when **costly computations
+can be re-used**. A cache is a high-speed, ephemere data storage layer
+containing a subset of data for fast access. Instead of computing over and over
+the same costly results, you store it into the cache. When you need it later,
+read it from the cache instead of re-computing.
+
+Python's standard libary provides decorators to easily cache functions: `@cache`
+and `@lru_cache` from the [functools][functools] module.
+
+### Cache Size
+
+A cache typically lives in a storage with a significantly fast access compared
+to time to compute the results. It will often be your RAM, which is limited in
+size. Tradeoff: the bigger your cache, the more costly computation you can save,
+but the more space it will use.
+
+### Eviction Policy
+
+Most of the time, you want to limit the maximum size in your cache. You do so
+via an **eviction policy**. It's a strategy to choose which element to throw in
+the cache when it reaches its capacity. A simple one is the Last Recently Used
+(LRU) policy, which removes the oldest cache entries.
+
+### Cache Freshness
+
+Remember that element in the cache are not re-computed. If for a same imput, you
+computation output will change in the future (e.g. a webpage with a game
+leaderboard ), you need to remove the stale elements from the cache.
+
+---
+
+## In Practice
+
+Here we take as an example the [Fibonacci sequence] [fibo] computation. We
+implement the recursive definition which gets quickly slow as the input number
+grows.
+
+Here is the recursion: f(n) = f(n-1) + f(n)
+
+If we develop a few term for n=10:
+
+1. f(10) = f(9) + f(8)
+2. f(10) = (f(8) + f(7)) + (f(7) + f(6))
+3. f(10) = ( (f(7) + f(6)) + (f(6) + f(5)) ) + ( (f(6) + f(5)) + (f(5) + f(4)) )
+4. ...
+
+Here is the implementaion in Python:
+
+```python
+---
+filename=cache.py
+github=https://github.com/bitswired/bitsof-python/blob/master/bitsof_python/functools_caching/cache.py
+---
+# Recursive fibo without cache
+def recur_fibo_no_cache(n):
+    if n <= 1:
+        return n
+    else:
+        return recur_fibo_no_cache(n - 1) + recur_fibo_no_cache(n - 2)
+```
+
+<ColoredBlock variant="info">
+  This implementaion is recursive: the function calls itself many times to solve
+  the problem. It is not the most performant implementation. The iterative
+  version is both more computationally and memory efficient. However it's a good
+  example to demonstrate the benefits of caching.
+</ColoredBlock>
+
+As you can observe, we repeat over and over the same computations. An easy way
+to speedup this code is to have a cache: we will never compute more than once
+for a given input.
+
+In the following snippet, we create 2 cached functions using `functools`
+decorators. These functions just call the recursive implementation, but they use
+a cache to avoid re-computing. First we use the `@cache` decorator, which uses
+an unbounded cache. Then we use the `@lru_cache` decorator with a max size of 5.
+`@lru_cache(maxsize=None)` is equivalent to `@cache`.
+
+```python
+---
+filename=cache.py
+github=https://github.com/bitswired/bitsof-python/blob/master/bitsof_python/functools_caching/cache.py
+---
+# Recursive fibo with cache (using functools cache decorator)
+@cache
+def recur_fibo_cache(n):
+    if n <= 1:
+        return n
+    else:
+        return recur_fibo_cache(n - 1) + recur_fibo_cache(n - 2)
+
+
+# Recursive fibo with lru cache (using functools lru_cache decorator)
+@lru_cache(maxsize=5)
+def recur_fibo_lru_cache(n):
+    if n <= 1:
+        return n
+    else:
+        return recur_fibo_lru_cache(n - 1) + recur_fibo_lru_cache(n - 2)
+```
+
+As always, measure the performance gain to validate the solution. No need to add
+complexity if it does not improve the performance!
+
+```python
+---
+filename=cache.py
+github=https://github.com/bitswired/bitsof-python/blob/master/bitsof_python/functools_caching/cache.py
+collapsible=true
+---
+def exec_and_clear(f, arg):
+    a = f(arg)
+    f.cache_clear()
+    return a
+
+if __name__ == "__main__":
+    N = 35
+    TIMEIT_NUMBER = 10
+
+    # Compute execution time for no-cache, cache and LRU cache
+    no_cache_timer = Timer(lambda: recur_fibo_no_cache(N))
+    no_cache_time = no_cache_timer.timeit(number=TIMEIT_NUMBER) / TIMEIT_NUMBER
+    print(f"Execution time without cache: {no_cache_time:.2e}")
+
+    cache_timer = Timer(lambda: exec_and_clear(recur_fibo_cache, N))
+    cache_time = cache_timer.timeit(number=TIMEIT_NUMBER) / TIMEIT_NUMBER
+    print(
+        f"Execution time with cache: {cache_time:.2e}",
+    )
+
+    lru_cache_timer = Timer(lambda: exec_and_clear(recur_fibo_lru_cache, N))
+    lru_cache_time = lru_cache_timer.timeit(number=TIMEIT_NUMBER) / TIMEIT_NUMBER
+    print(
+        f"Execution time with LRU cache: {lru_cache_time:.2e}",
+    )
+
+    print()
+
+    # Compute speedup for cache and LRU cache over no-cache
+    speedup = round(no_cache_time / cache_time)
+    print(f"Speedup cache over no-cache: x{speedup:.2e}")
+
+    speedup = round(no_cache_time / lru_cache_time)
+    print(f"Speedup LRU cache over no-cache (max size 2): x{speedup:.2e}")
+```
+
+| Function  | Run Time (seconds) |
+| --------- | ------------------ |
+| no cache  | 1.99               |
+| cache     | 8.14e-6            |
+| lru cache | 8.73e-6            |
+
+Using the `@cache` decorator we get a **x2.44e5 speedup**!
+
+Using the `@lru_cache` decorator we get **a x2.28e5 speedup**!
+
+<LinearLogLineChart
+  title="Execution time for cache vs no-cache implementation"
+  xLabel="Execution time"
+  yLabel="N"
+  width="100%"
+  height={300}
+  numYTicks={2}
+  gridNumYTicks={2}
+  series={props.data}
+/>
+
+[github repo]:
+  https://github.com/bitswired/bitsof-python/blob/master/bitsof_python/functools_caching/cache.py
+[fibo]: https://en.wikipedia.org/wiki/Fibonacci_number
+[functools]: https://docs.python.org/3/library/functools.html
