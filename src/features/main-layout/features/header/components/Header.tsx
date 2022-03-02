@@ -94,9 +94,13 @@ function HeaderMax() {
         },
       }}
     >
-      <Logo height="40px" />
-      <Navigation />
-      <div />
+      <Box css={{ flex: '1 1 auto' }}>
+        <Logo height="40px" />
+      </Box>
+      <Box css={{ flex: '2 1 auto' }}>
+        <Navigation />
+      </Box>
+      <Box css={{ flex: '1 1 auto' }}>sadsf</Box>
     </Bar>
   )
 }
