@@ -119,7 +119,9 @@ export function LineChart(props: LineChartProps): JSX.Element {
                   </div>
                   {accessors.xAccessor(tooltipData!.nearestDatum!.datum)}
                   {', '}
-                  {accessors.yAccessor(tooltipData!.nearestDatum!.datum)}
+                  {accessors
+                    .yAccessor(tooltipData!.nearestDatum!.datum)
+                    .toExponential(3)}
                 </div>
               )}
             />

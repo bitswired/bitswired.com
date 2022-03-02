@@ -83,4 +83,32 @@ export const Prose = styled('article', {
     textAlign: 'center',
     fontFamily: '$serif',
   },
+
+  table: {
+    margin: 'auto',
+    my: '2rem',
+  },
+
+  td: {
+    border: '1px solid #ddd',
+    padding: '8px',
+  },
+
+  th: {
+    border: '1px solid #ddd',
+    padding: '8px',
+
+    py: '12px',
+    textAlign: 'left',
+    backgroundColor: '$primary1',
+    color: 'white',
+  },
+
+  'tr:nth-child(even)': {
+    backgroundColor: '#f2f2f2',
+  },
+
+  'tr:hover': {
+    backgroundColor: '#ddd',
+  },
 })

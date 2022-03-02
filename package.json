@@ -46,6 +46,7 @@
     "redaxios": "^0.4.1",
     "rehype-mathjax": "^4.0.2",
     "remark": "^14.0.2",
+    "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
     "schema-dts": "^1.0.0",
     "unist-util-visit": "^4.1.0",

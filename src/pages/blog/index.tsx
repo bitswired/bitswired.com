@@ -2,7 +2,7 @@ import { bundleMDX } from 'mdx-bundler'
 import { default as fsWithCallbacks } from 'fs'
 import path from 'path'
 import { CONFIG } from '@config'
-import { BlogPostGrid, validatePostMeta } from '@features/blog'
+import { BlogPostGridMobile, validatePostMeta } from '@features/blog'
 import { CommonSEO } from '@features/seo'
 const fs = fsWithCallbacks.promises
 
@@ -11,6 +11,14 @@ interface BlogPageProps {
 }
 
 export default function BlogPage({ postMetas }: BlogPageProps) {
+  const sortedPostMetas = postMetas.sort((a, b) => {
+    if (a.datePublished > b.datePublished) {
+      return -1
+    } else {
+      return 1
+    }
+  })
+
   return (
     <>
       <CommonSEO
@@ -18,7 +26,8 @@ export default function BlogPage({ postMetas }: BlogPageProps) {
         description="Bitswired blog. Articles about artificial intelligence, computer graphics, web development and more."
         uri="/blog"
       />
-      <BlogPostGrid postMetas={postMetas} />
+      {/* <BlogPostGrid postMetas={sortedPostMetas} /> */}
+      <BlogPostGridMobile postMetas={sortedPostMetas} />
     </>
   )
 }

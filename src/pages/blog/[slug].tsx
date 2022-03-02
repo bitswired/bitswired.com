@@ -2,6 +2,7 @@ import { bundleMDX } from 'mdx-bundler'
 import { getMDXExport } from 'mdx-bundler/client'
 import React from 'react'
 import rehypeMathjax from 'rehype-mathjax'
+import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import { default as fsWithCallbacks } from 'fs'
 import path from 'path'
@@ -87,6 +88,7 @@ async function getPostBySlug(slug: string) {
         ...(options.remarkPlugins ?? []),
         remarkMath,
         remarkToc,
+        remarkGfm,
       ]
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),

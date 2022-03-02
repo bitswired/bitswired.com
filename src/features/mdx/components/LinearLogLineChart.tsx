@@ -14,7 +14,12 @@ export function LinearLogLineChart(props: LineChartProps): JSX.Element {
 
   return (
     <Box
-      css={{ backgroundColor: '$gray4', borderRadius: '$md', padding: '$4' }}
+      css={{
+        backgroundColor: '$gray4',
+        borderRadius: '$md',
+        padding: '$4',
+        my: '2rem',
+      }}
     >
       <LineChart {...props} yScale={{ type: yScaleMode as YScaleMode }} />
       <RadioGroup
