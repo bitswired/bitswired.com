@@ -110,7 +110,7 @@ export function BlogPostCardMobile({ postMeta }: BlogPostCardMobileProps) {
       </MetaContainer>
 
       <ImageContainer>
-        <ImageRatio ratio={1}>
+        <ImageRatio ratio={4 / 3}>
           <InternalLink href={`/blog/${postMeta.slug}`} title={postMeta.title}>
             <Image
               src={postMeta.image}

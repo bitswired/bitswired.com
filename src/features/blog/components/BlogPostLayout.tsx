@@ -8,7 +8,7 @@ import { Toc } from './Toc'
 
 const Title = styled('h1', {
   fontSize: '2rem',
-  fontWeight: '$regular',
+  fontWeight: '$bold',
   fontFamily: '$sans',
   color: '$text',
 

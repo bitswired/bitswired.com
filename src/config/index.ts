@@ -10,6 +10,7 @@ export const CONFIG = {
   socials: {
     twitter: 'https://twitter.com/bitswired',
     linkedin: 'https://www.linkedin.com/in/jimi-vaubien',
+    discord: 'https://discord.gg/5fzZgatdwZ',
     twitterUserHandle: '@bitswired',
     twitterSiteHandle: '@bitswired',
   },

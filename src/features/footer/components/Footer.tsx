@@ -7,9 +7,7 @@ const FooterContainer = styled('footer', {
   display: 'grid',
   gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
   justifyContent: 'center',
-  //   justifyItems: 'start',
-  //   alignContent: 'start',
-  //   justifyContent: 'start',
+
   rowGap: '$10',
 
   padding: '$6',
@@ -48,7 +46,7 @@ export function Footer() {
         <Pages />
       </FooterContainer>
       <Copyright as="p">
-        Copyright © 2021 Bitswired. All Rights Reserved.
+        Copyright © {new Date().getFullYear()} Bitswired. All Rights Reserved.
       </Copyright>
     </>
   )

@@ -4,7 +4,6 @@ import { styled } from '@lib/stitches'
 
 const PagesContainer = styled('section', {
   display: 'flex',
-  margin: 'auto',
   alignItems: 'center',
   flexDirection: 'column',
   color: 'white',

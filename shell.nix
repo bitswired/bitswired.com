@@ -3,8 +3,8 @@ with import <nixpkgs> {};
 stdenv.mkDerivation {
     name = "node";
     buildInputs = [
-        nodejs
-        yarn
+        nodejs-16_x
+        (yarn.override { nodejs = nodejs-16_x ;})
     ];
     shellHook = ''
         export PATH="$PWD/node_modules/.bin/:$PATH"
