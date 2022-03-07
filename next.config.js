@@ -24,6 +24,7 @@ const nextConfiguration = {
 
   images: {
     domains: ['statics.bitswired.com'],
+    loader: 'custom',
   },
 }
 
