@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { keyframes, styled } from '@lib/stitches'
+
 const NewsletterSubscriptionForm = dynamic(() =>
   import('@features/newsletter').then(
     (module: any) => module.NewsletterSubscriptionForm

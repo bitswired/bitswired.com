@@ -1,5 +1,6 @@
 import { bundleMDX } from 'mdx-bundler'
 import { getMDXExport } from 'mdx-bundler/client'
+import dynamic from 'next/dynamic'
 import React from 'react'
 import rehypeMathjax from 'rehype-mathjax'
 import remarkGfm from 'remark-gfm'
@@ -8,10 +9,40 @@ import { default as fsWithCallbacks } from 'fs'
 import path from 'path'
 import { CONFIG } from '@config'
 import { BlogPostLayout, validatePostMeta } from '@features/blog'
-import { mdxGeneralComponents } from '@features/mdx'
 import { BlogPostingJSONLD, CommonSEO } from '@features/seo'
-import { remarkToc, rehypeToc, TocEntry } from '@lib/mdx/toc-plugins'
+import {
+  remarkToc,
+  rehypeToc,
+  TocEntry,
+  remarkExtractComponents,
+} from '@lib/mdx'
 const fs = fsWithCallbacks.promises
+
+const generalComponents = {
+  code: dynamic(() =>
+    import('@features/mdx').then((module: any) => module.MDXCodeBlock)
+  ),
+  a: dynamic(() =>
+    import('@features/mdx').then((module: any) => module.MDXLink)
+  ),
+}
+
+const otherComponents = {
+  Figure: dynamic(() =>
+    import('@features/mdx').then((module: any) => module.Figure)
+  ),
+  ColoredBlock: dynamic(() =>
+    import('@features/mdx').then((module: any) => module.ColoredBlock)
+  ),
+
+  SummaryBlock: dynamic(() =>
+    import('@features/mdx').then((module: any) => module.SummaryBlock)
+  ),
+
+  LinearLogLineChart: dynamic(() =>
+    import('@features/mdx').then((module: any) => module.LinearLogLineChart)
+  ),
+}
 
 interface BlogPostPageProps {
   postMeta: BlogPostMeta
@@ -21,7 +52,14 @@ interface BlogPostPageProps {
 
 interface MDXExports {
   toc: TocEntry[]
+  components: (keyof typeof otherComponents)[]
 }
+
+type ComponentKeys =
+  | keyof typeof generalComponents
+  | keyof typeof otherComponents
+
+type TComponentKeys = { [K in ComponentKeys]?: React.ComponentType }
 
 export default function BlogPostPage({
   postMeta,
@@ -31,6 +69,14 @@ export default function BlogPostPage({
   const mdxExport = getMDXExport<MDXExports, BlogPostMeta>(code)
 
   const Component = React.useMemo(() => mdxExport.default, [code])
+
+  const comps: TComponentKeys = { ...generalComponents }
+
+  mdxExport.components.forEach((componentName) => {
+    comps[componentName] = otherComponents[componentName]
+  })
+
+  console.log(comps)
 
   return (
     <>
@@ -50,7 +96,7 @@ export default function BlogPostPage({
       />
 
       <BlogPostLayout postMeta={postMeta} toc={mdxExport.toc}>
-        <Component components={mdxGeneralComponents} data={data} />
+        <Component components={comps} data={data} />
       </BlogPostLayout>
     </>
   )
@@ -89,6 +135,7 @@ async function getPostBySlug(slug: string) {
         remarkMath,
         remarkToc,
         remarkGfm,
+        remarkExtractComponents,
       ]
       options.rehypePlugins = [
         ...(options.rehypePlugins ?? []),
