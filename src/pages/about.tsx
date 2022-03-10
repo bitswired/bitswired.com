@@ -1,4 +1,3 @@
-import { Box } from '@components/core'
 import { Me, Newsletter, Bitswired } from '@features/about'
 import { styled } from '@lib/stitches'
 
@@ -54,19 +53,6 @@ const Wrapper = styled('div', {
 export default function AboutPage() {
   return (
     <>
-      <Box
-        css={{
-          fontFamily: ' $serif',
-          fontSize: '3rem',
-          lineHeight: '4rem',
-          margin: 'auto',
-          width: '25ch',
-          textAlign: 'center',
-        }}
-      >
-        Build next-gen apps with OpenAI’s powerful models.
-      </Box>
-
       <Section id="newsletter" className="section" variant="light">
         <Wrapper>
           <Newsletter />
