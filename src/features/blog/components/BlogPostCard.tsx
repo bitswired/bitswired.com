@@ -44,8 +44,9 @@ const MetaContainer = styled('div', {
 
 const Title = styled('p', {
   fontSize: '$6',
-  fontWeight: '$bold',
-  fontFamily: '$sans',
+  fontWeight: '$medium',
+  fontFamily: '$serif',
+  textTransform: 'capitalize',
 
   '@bp2': {
     fontSize: '$9',

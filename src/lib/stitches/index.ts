@@ -35,7 +35,7 @@ export const { styled, theme, getCssText, globalCss, reset, keyframes } =
   createStitches({
     theme: {
       fonts: {
-        serif: 'Crimson Pro, serif',
+        serif: 'Roboto Serif, serif',
         sans: 'Open Sans, sans-serif',
         mono: 'JetBrains Mono, monospace',
       },

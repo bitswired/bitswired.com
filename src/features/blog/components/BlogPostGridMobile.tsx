@@ -32,7 +32,7 @@ export function BlogPostGridMobile({ postMetas }: BlogPostGridMobileProps) {
               css={{
                 height: '1Apx !important',
                 backgroundColor: '$gray7',
-                my: '2rem',
+                my: '0.2',
               }}
             />
           </Box>

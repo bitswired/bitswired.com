@@ -1,4 +1,5 @@
 import JoiDate from '@joi/date'
+import dayjs from 'dayjs'
 import * as JoiImport from 'joi'
 
 const Joi = JoiImport.extend(JoiDate)
@@ -20,6 +21,13 @@ const metaSchema = Joi.object({
   images: Joi.array().items(Joi.string()).required(),
 })
 
+function postProcess(postMeta: BlogPostMeta) {
+  const res = { ...postMeta }
+  res.datePublished = dayjs(postMeta.datePublished).format('MMM M, YYYY')
+  res.dateModified = dayjs(postMeta.dateModified).format('MMM M, YYYY')
+  return res
+}
+
 export function validatePostMeta(obj: Record<string, unknown>, slug: string) {
   const d = metaSchema.validate(obj, { convert: true })
   if (d.error) throw new Error(d.error)
@@ -27,5 +35,5 @@ export function validatePostMeta(obj: Record<string, unknown>, slug: string) {
   if (postMeta.slug !== slug)
     throw new Error('Slug and file name not identical')
 
-  return postMeta
+  return postProcess(postMeta)
 }

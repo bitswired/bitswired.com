@@ -1,12 +1,16 @@
-import { AspectRatio, InternalLink, Image, Box, Button } from '@components/core'
+import { AspectRatio, InternalLink, Image, Box } from '@components/core'
 import { styled } from '@lib/stitches'
+
+const HEIGHT = '15vh'
 
 const CardContainer = styled('article', {
   display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'center',
+  justifyContent: 'space-between',
+  alignItems: 'start',
   borderRadius: '$md',
   backgroundColor: 'white',
+  overflow: 'hidden',
+  height: HEIGHT,
 
   gap: '$2',
 
@@ -43,13 +47,13 @@ const CardContainer = styled('article', {
 const MetaContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  width: '70%',
   gap: '$2',
+  width: `calc(100% - ${HEIGHT})`,
+  // width: '100px',
 })
 
 const ImageContainer = styled('div', {
-  width: '30%',
-  maxWidth: '150px',
+  width: HEIGHT,
   overflow: 'hidden',
   borderRadius: '$sm',
 })
@@ -57,19 +61,28 @@ const ImageContainer = styled('div', {
 const ImageRatio = styled(AspectRatio, {})
 
 const Title = styled('div', {
-  fontSize: '1.1em',
-  fontWeight: '$bold',
+  fontSize: '1em',
+  fontWeight: '$medium',
+  fontFamily: '$serif',
+  lineHeight: '1.5em',
+  textTransform: 'capitalize',
+  maxHeight: '3em',
+  overflow: 'hidden',
+
+  display: '-webkit-box',
+  '-webkit-line-clamp': 2,
+  '-webkit-box-orient': 'vertical',
 })
 
-const Description = styled('div', {
-  fontSize: '0.8em',
-})
+// const Description = styled('div', {
+//   fontSize: '0.8em',
+// })
 
 const MetaRow = styled('div', {
   display: 'flex',
   gap: '$4',
   alignItems: 'center',
-  fontSize: '0.6em',
+  fontSize: '0.8em',
 })
 
 interface BlogPostCardMobileProps {
@@ -77,40 +90,25 @@ interface BlogPostCardMobileProps {
 }
 
 export function BlogPostCardMobile({ postMeta }: BlogPostCardMobileProps) {
-  let x = postMeta.title.substring(0, 57)
-  if (x.length < postMeta.title.length) x += '...'
-
-  let y = postMeta.description.substring(0, 77)
-  if (y.length < postMeta.description.length) y += '...'
-
   return (
     <CardContainer>
       <MetaContainer>
-        <Title>{x}</Title>
+        <Title>{postMeta.title}</Title>
 
-        <Description>{y}</Description>
+        {/* <Description>{y}</Description> */}
 
         <MetaRow>
-          <Box
-            css={{
-              textTransform: 'uppercase',
-              color: '$secondary1',
-              fontWeight: '$bold',
-            }}
-          >
-            {postMeta.category}
+          <Box css={{ color: '$gray9', fontFamily: '$serif' }}>
+            {postMeta.dateModified}
           </Box>
-          <Box css={{ color: '$gray9' }}>{postMeta.readMinutes} min</Box>
-          <InternalLink href={`/blog/${postMeta.slug}`} title={postMeta.title}>
-            <Button variant="primary-link" size="sm">
-              READ
-            </Button>
-          </InternalLink>
+          <Box css={{ color: '$gray9', fontFamily: '$serif' }}>
+            {postMeta.readMinutes} min read
+          </Box>
         </MetaRow>
       </MetaContainer>
 
       <ImageContainer>
-        <ImageRatio ratio={4 / 3}>
+        <ImageRatio ratio={1}>
           <InternalLink href={`/blog/${postMeta.slug}`} title={postMeta.title}>
             <Image
               src={postMeta.image}
