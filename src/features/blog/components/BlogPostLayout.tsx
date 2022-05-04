@@ -105,7 +105,7 @@ export function BlogPostLayout({
               src={postMeta.image}
               layout="fill"
               sizes="(max-width: 600px) 300px, 600px"
-              quality={50}
+              quality={90}
               alt={postMeta.title}
               priority
             />
