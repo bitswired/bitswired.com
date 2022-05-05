@@ -79,7 +79,7 @@ export const Prose = styled('article', {
   },
 
   figcaption: {
-    fontSize: '1.2em',
+    fontSize: '1em',
     textAlign: 'center',
     fontFamily: '$serif',
   },

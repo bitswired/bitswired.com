@@ -322,7 +322,7 @@ size. Here it’s simply the number of images.
 The last step here is to implement getitem which retrieves a tuple of image and
 label given an index: we get the file path at the received index, then we load
 the image using torchvision, we get the image label using our utility function,
-and finally we the resized image with the corresponding label.
+and finally we get the resized image with the corresponding label.
 
 ```python
 ---
@@ -504,7 +504,7 @@ is flawed**: the DataLoader is monolithic and makes reusability and
 composability difficult.
 
 **TorchData** is a great solution bringing modular and composable data loading
-prmitives: we end up writting less custom code, since the library abstracts a
+primitives: we end up writting less custom code, since the library abstracts a
 lot of common use cases into **DataPipes**.
 
 Try TorchData in your next project and never go back.
