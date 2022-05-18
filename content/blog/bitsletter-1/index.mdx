@@ -1,0 +1,192 @@
+---
+id: 4
+title:
+  'Bitsletter #1: Split With Hash Functions, Web App On The Edge, Diffusion
+  Models ... '
+description: 'Bitsletter #1'
+readMinutes: 10
+image: '/blog/4/cover.png'
+category: 'Newsletter'
+series: 'Bitsletter'
+tags: ['PyTorch', 'Template', 'Best-Practices']
+slug: 'bitsletter-1'
+published: true
+datePublished: '2022-05-11'
+dateModified: '2022-05-11'
+images: ['https://assets.bitswired.com/blog/4/cover.png']
+---
+
+## 🧠 ML Tip: Train/test split with a hash function
+
+­ When you work on a machine learning solution, you often need to split the data
+into a train and test set.
+
+The simplest ways to split the data is to use something like `train_test_split`
+from sklearn or shuffling and computing the split index.
+
+It’s convenient but has a couple of drawbacks:
+
+- You need to save the seed for **reproducibility**
+- If you **gather more data** and redo the split, you are not sure that previous
+  all the previous test data will still be in the new test set
+- You can have **data leakage**: let’s say you have a dataset where the data
+  from a same day is highly correlated. You would like to avoid splitting in the
+  middle of a day, since the test data will be too correlated to the train data
+  for this specific day
+
+I was reading some material about **machine learning design patterns** and
+discovered a nice trick to overcome these problems:
+
+Use a **hash function**, on the proper column, to determine the split of each
+data sample.
+
+A hash function has the nice property to map inputs to a **uniform bytes
+distribution**: if you hash each row based on a defined identifier column,
+convert the hash to an integer and take the modulo 10, you will have a uniform
+distribution over all the digits:
+
+- `h = hash(row[identifier]) % 10`: will output 0,1,…,9 uniformly and
+  deterministically without a seed (for a well distributed identifier)
+- `is_test = h >= 8`: will be true in 20% of the cases.
+
+It solves the issues discussed before:
+
+- You **don’t need** a seed
+- If you **gather more data** and redo the split, the new test set will contain
+  all the examples from the previous test set
+- Using the same example as before, If you use the day column as the identifier,
+  you are sure that every data from the same day will fall either in the train
+  or test split **entirely**
+
+## 🌐 Web Tip: Bring your web app close to the users ­ Edge computing for the web
+
+Edge computing is rising. 🚀
+
+The web is an incredible tool to reach massive amount of people worldwide.
+However, performance is key to the user experience (and thus for user
+retention): **-0.1 seconds** loading time can result in **+8% conversions**
+according to Google data.
+
+Furthermore, lots of internet user come from countries where **4G/5G is not
+widely available**: for them it’s even more important to deploy fast-loading web
+applications.
+
+If you deploy your application on servers at a single location, it’s simple but
+you get the worst performances (some users in the world will be far from the
+servers).
+
+The next step is to use multi region deployment, all cloud have multiple main
+regions like Europe, Asia, America, .... It’s better, but still coarse-grained,
+they usually have a few data centers per region.
+
+🔥 If you use edge deployment with tools like **CloudFlare Workers**, you can
+deploy as close as possible to the users: CloudFlare global network is present
+in 270 cities in 100+ countries, resulting in **50 ms from 95% of the world’s
+internet connected population**.
+
+1. Scale infinitely: your users will be scattered around many servers, reducing
+   the load
+1. Fast loading: the server might be the user’s city! You can’t beat this kind
+   on locality.
+
+## 👩‍🔬 Research Paper: Diffusion Models Beat GANs on Image Synthesis ­ You likely
+
+heard about DALL-E 2, the new OpenAI model which generates stunning images from
+textual descriptions.
+
+At first, we can think that it's based on Generative Adversarial Network, like
+many other impressive image synthesis models.
+
+However, they use another algorithm called **Diffusion Probabilistic Model**.
+
+The main idea is to **incrementally add noise** to images, until you get an
+image with random pixels. Then you train a model to **denoise** the image **step
+by step**. Given a step, and a noisy image, the model denoises only the image a
+tiny bit to reach the next step, and so on, until you reach the **original
+image**.
+
+Doing so, your model learns to **transform the prior noise distribution to the
+original image distribution**.
+
+Finally, to generate an image, you draw a random image based on your noise
+prior, and you apply your denoising model many times until you recover an image
+from the **target distribution**.
+
+In the paper
+[Diffusion Models Beat GANs on Image Synthesis](https://arxiv.org/abs/2105.05233),
+researchers compare these diffusion models to GAN and show they can achieve
+better image synthesis, with a more stable training process.
+
+Definitely worth reading if you're interested in generative models.
+
+## 🛠️ Tool: PyScript, Python interpreted in the browser
+
+­At **PyCon US 2022**, Anaconda announced [PyScript](https://pyscript.net/):
+Python interpreted in the browser.
+
+They **ported CPython in Web Assembly** to interpret Python code directly in
+browsers (without transpiling it to another language like JavaScript).
+
+It **maximizes the performance** since Web Assembly is the fastest way to
+execute code in the browser.
+
+It's a great news for Python developers who now have Web superpowers. Imagine
+processing data, building web application, … in Python directly 🚀.
+
+## 📰 News
+
+### AWS Release A Carbon Footprint Tool
+
+AWS released a
+[tool](https://aws.amazon.com/aws-cost-management/aws-customer-carbon-footprint-tool/)
+to help you track and forecast the carbon footprint of your cloud utilization.
+
+Cloud computing is a great technology but it's easy to forget that it uses
+“real” resources, and thus has a carbon impact. It's a step in the right
+direction for businesses willing to reach carbon neutrality.
+
+<Figure
+  ratio={16 / 9}
+  layout="fill"
+  width="200px"
+  objectFit="contain"
+  src="/blog/4/aws-carbon-16-9.png"
+  alt="AWS Release A Carbon Footprint Tool"
+  title="AWS Release A Carbon Footprint Tool"
+/>
+
+### PyTorch v1.11 Is Out
+
+Last month, PyTorch released a new version:
+[v1.11](https://pytorch.org/blog/pytorch-1.11-released/). Here are 3 main
+features to watch:
+
+- TorchData beta: a library to build better data loading pipelines.
+- Funtorch beta: a JAX-like library for PyTorch: compute the gradient of Python
+  functions.
+- Improved distributed training. Check it out.
+
+<Figure
+  ratio={16 / 9}
+  layout="fill"
+  objectFit="contain"
+  src="/blog/4/pytorch-v11-16-9.png"
+  alt="PyTorch v1.11 Is Out"
+  title="PyTorch v1.11 Is Out"
+/>
+
+## Latest article on Bitswired
+
+Check out my
+[introduction to TorchData](/blog/introduction-to-torchdata-the-best-way-to-load-data-in-pytorch):
+a library to build better data loading pipelines in PyTorch. It’s intended to
+replace the usual Dataset + DataLoader approach.
+
+<Figure
+  ratio={16 / 9}
+  layout="fill"
+  objectFit="contain"
+  src="/blog/3/cover.png"
+  alt="Introduction to TorchData"
+  title="Introduction to TorchData"
+/>

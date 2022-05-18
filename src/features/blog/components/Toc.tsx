@@ -6,6 +6,12 @@ const TocEntry = styled('a', {
   display: 'block',
   color: '$text',
   textDecoration: 'none',
+
+  width: '40ch',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+
   '&:hover': {
     color: '$secondary1',
     textDecoration: 'underline',
