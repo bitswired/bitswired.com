@@ -57,7 +57,12 @@ export function BlogPostLayout({
         >
           <Box
             as="div"
-            css={{ position: 'sticky', top: '150px', width: 'max-content' }}
+            css={{
+              position: 'sticky',
+              top: '150px',
+              // width: 'max-content',
+              maxWidth: '50ch',
+            }}
           >
             <Toc toc={toc} />
             <MetaZone postMeta={postMeta} />
