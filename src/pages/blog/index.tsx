@@ -12,7 +12,7 @@ interface BlogPageProps {
 
 export default function BlogPage({ postMetas }: BlogPageProps) {
   const sortedPostMetas = postMetas.sort((a, b) => {
-    if (a.datePublished > b.datePublished) {
+    if (a.id > b.id) {
       return -1
     } else {
       return 1

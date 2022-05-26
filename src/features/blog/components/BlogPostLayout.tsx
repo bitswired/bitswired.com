@@ -60,8 +60,7 @@ export function BlogPostLayout({
             css={{
               position: 'sticky',
               top: '150px',
-              // width: 'max-content',
-              maxWidth: '50ch',
+              maxWidth: '400px',
             }}
           >
             <Toc toc={toc} />
@@ -110,7 +109,7 @@ export function BlogPostLayout({
               src={postMeta.image}
               layout="fill"
               sizes="(max-width: 600px) 300px, 600px"
-              quality={90}
+              quality={91}
               alt={postMeta.title}
               priority
             />

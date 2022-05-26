@@ -23,8 +23,8 @@ const metaSchema = Joi.object({
 
 function postProcess(postMeta: BlogPostMeta) {
   const res = { ...postMeta }
-  res.datePublished = dayjs(postMeta.datePublished).format('MMM M, YYYY')
-  res.dateModified = dayjs(postMeta.dateModified).format('MMM M, YYYY')
+  res.datePublished = dayjs(postMeta.datePublished).format('MMM D, YYYY')
+  res.dateModified = dayjs(postMeta.dateModified).format('MMM D, YYYY')
   return res
 }
 

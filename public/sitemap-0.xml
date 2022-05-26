@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://www.bitswired.com</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-03-09T14:55:25.503Z</lastmod></url>
-<url><loc>https://www.bitswired.com/about</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-03-09T14:55:25.503Z</lastmod></url>
-<url><loc>https://www.bitswired.com/blog</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-03-09T14:55:25.503Z</lastmod></url>
-<url><loc>https://www.bitswired.com/blog/1-line-to-cache-slow-functions-and-speed-up-your-python-script</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-03-09T14:55:25.503Z</lastmod></url>
-<url><loc>https://www.bitswired.com/blog/3-simple-ways-to-handle-bigger-datasets-in-pandas</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-03-09T14:55:25.503Z</lastmod></url>
-<url><loc>https://www.bitswired.com/blog/perfect-template-to-start-python-projects</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-03-09T14:55:25.503Z</lastmod></url>
+<url><loc>https://www.bitswired.com</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-19T15:51:28.963Z</lastmod></url>
+<url><loc>https://www.bitswired.com/about</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-19T15:51:28.963Z</lastmod></url>
+<url><loc>https://www.bitswired.com/blog</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-19T15:51:28.963Z</lastmod></url>
+<url><loc>https://www.bitswired.com/blog/1-line-to-cache-slow-functions-and-speed-up-your-python-script</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-19T15:51:28.963Z</lastmod></url>
+<url><loc>https://www.bitswired.com/blog/3-simple-ways-to-handle-bigger-datasets-in-pandas</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-19T15:51:28.963Z</lastmod></url>
+<url><loc>https://www.bitswired.com/blog/bitsletter-1</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-19T15:51:28.963Z</lastmod></url>
+<url><loc>https://www.bitswired.com/blog/bitsletter-2</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-19T15:51:28.963Z</lastmod></url>
+<url><loc>https://www.bitswired.com/blog/introduction-to-torchdata-the-best-way-to-load-data-in-pytorch</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-19T15:51:28.963Z</lastmod></url>
+<url><loc>https://www.bitswired.com/blog/perfect-template-to-start-python-projects</loc><changefreq>daily</changefreq><priority>0.7</priority><lastmod>2022-05-19T15:51:28.963Z</lastmod></url>
 </urlset>
