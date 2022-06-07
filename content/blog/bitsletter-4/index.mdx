@@ -1,0 +1,182 @@
+---
+id: 7
+title:
+  'Bitsletter #4: Debug Models With Overfitting, Await Concurrent Promises,
+  Large Language Models Are Zero Shot Learners, Remotion ... '
+description:
+  'Bitsletter #4: In this episode we discuss how to debug models with
+  overfitting, awaiting mulitple promises concurrently, the reasoning potential
+  hidden in large language models and Remotion and tool to create videos with
+  React.'
+readMinutes: 10
+image: '/blog/7/cover.png'
+category: 'Newsletter'
+series: 'Bitsletter'
+tags: ['Machine Learning', 'Web Development', 'Research']
+slug: 'bitsletter-4'
+published: true
+datePublished: '2022-06-01'
+dateModified: '2022-06-01'
+images: ['https://assets.bitswired.com/blog/7/cover.png']
+---
+
+## Subscribe to the Bitsletter
+
+If you like my content, support me by
+[subscribing to my newsletter: Bitsletter](https://newsletter.bitswired.com).
+
+Every **Wednesday** receive **actionable content** to stay on top of **AI** &
+**Web Technologies**:
+
+- 1 AI/Machine learning tip
+- 1 Web Tech tip
+- 1 Research paper
+- Curated news and tools in AI and Web
+
+Happy reading.
+
+## 🧠 ML Tip: Debug Models With Overfitting
+
+Debugging machine learning models can be hard and time-consuming. Many things
+can go wrong:
+
+- Data loading
+- Modeling
+- Training
+- …
+
+Fortunately there is a simple trick to detect bugs early: **overfitting**.
+
+Overfitting happens when a model is over-specialized on the training set and
+unable to generalize on new data.
+
+As bad as it sounds, **overfitting can be your ally** to find bug easily in your
+code: if your model overfits, at least the training process worked on the
+training dataset. It is a clue that you don’t have a bug in you code.
+
+The idea is to create artificially the condition for overfitting:
+
+- Take a few batches of your training data
+- Train your model on it for many steps
+- If the model overfits (loss going to almost 0 quickly), you likely have a
+  bug-free code
+- If the model can’t overfit, you must have a bug somewhere in the code
+
+## 🌐 Web Tip: Await Promises Concurrently With Promise.all
+
+We use promises extensively in JavaScript: they represent the **eventual
+completion or failure of an asynchronous task** and its resulting value.
+
+The most convenient way to wait in the code for the promise termination and get
+its value is through the `async/await` keywords.
+
+However if you have many promises to run **concurrently**, don’t fall into the
+trap of awaiting them in a for loop. The code will become synchronous, starting
+each promise and awaiting for its result in a sequence.
+
+Instead create an array of promises and call `Promise.all(arrayOfPromises)` to
+await for all the promises at the same time, resulting in the concurrent
+execution of all the promises.
+
+Using this technique you can make several call to API concurrently, saving your
+script lots of execution time.
+
+## 👩‍🔬 Research Paper: Large Language Models are Zero-Shot Reasoners
+
+There is a reasoning potential in large language models that you can unlock with
+prompt engineering (zero-shot learning).
+
+Large language models are great few-shot learners:
+
+Use a pre-trained large model and fine-tune on a few examples describing the new
+tasks.
+
+Using few-shot learning, these models achieved great performances in reasoning
+tasks like arithmetic or symbolic reasoning.
+
+What if we don't even need fine-tuning?
+
+[Large Language Models are Zero-Shot Reasoners](https://arxiv.org/abs/2205.11916)
+is a recent paper exploring zero-shot learning for reasoning tasks.
+
+Here the model is not fine-tuned on tasks examples.
+
+Only the prompts are engineered so that the model can handle the task, without
+explicit training.
+
+💡 Simply adding “_Let’s think step by step_” before each model answers
+increased the accuracy significantly on reasoning tasks:
+
+👉🏽 From **17.7% to 78.7%** on MultiArith <br /> 👉🏽 From **10.4% to 40.7%** GSM8K
+
+<br />
+
+These results show the huge zero-shot learning potential of large language
+models.
+
+⇒ High-level reasoning tasks can be extracted via clever prompting.
+
+## 🛠 Tool: Remotion
+
+Whether you're an individual doing it for fun, or a company with a content
+strategy, video is one of the most consumed content on the internet.
+
+1 Billion hours of video watched each day on YouTube.
+
+[Remotion](https://www.remotion.dev/), is an amazing tool using React to build
+videos.
+
+Uuse HTML, CSS, and JavaScript to create videos programmatically.
+
+Remotion unlocks the power of data driven videos:
+
+👉🏽 Build a template with React components <br /> 👉🏽 Use input data to drive the
+content <br /> 👉🏽 Build infinitely many videos by just changing the data <br />
+
+With Remotion you can also render videos in the cloud:
+
+👉🏽 Build your script describing the video <br /> 👉🏽 Run it in the cloud and get
+back an mp4 video file <br />
+
+💡 Finally Remotion also have a great video player with live reloading to
+inspect your video as a web application.
+
+You can smoothly play animations to get your video "frame perfect".
+
+Definitely give it a try if you are into video production/editing and web
+development.
+
+## 📰 News
+
+### Hugging Face Releases Evaluate, A Library To Evaluate Models
+
+Hugging Face released a
+[library for model evaluation](https://github.com/huggingface/evaluate). It
+contains many metrics, compatible with Numpy/Pandas/PyTorch/TensorFlow/JAX.
+Bonus: the input are type checked to avoid bugs and each metrics comes with a
+card describing the values, limitations and ranges.
+
+<Figure
+  ratio={16 / 9}
+  layout="fill"
+  objectFit="contain"
+  src="/blog/7/evaluate.png"
+  alt="Hugging Face Evaluate"
+  title="Hugging Face Evaluate"
+/>
+
+### GitHub Has Now Markdown Math Support
+
+Math equations contains many information if a compressed format ⇒ a great way to
+communicate. GitHub now
+[supports Markdown equation using MathJax](https://github.blog/2022-05-19-math-support-in-markdown/).
+Just use $ for inline equations and $$ for block equations (similar to LaTeX).
+
+<Figure
+  ratio={16 / 9}
+  layout="fill"
+  objectFit="contain"
+  src="/blog/7/github.png"
+  alt="GitHub Now Supports Math In Markdown"
+  title="GitHub Now Supports Math In Markdown"
+/>

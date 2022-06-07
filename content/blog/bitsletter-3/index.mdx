@@ -1,0 +1,187 @@
+---
+id: 6
+title:
+  'Bitsletter #3: Avoid Hot-Spots In Machine Learning APIs, Incremental Static
+  Rendering, Google Imagen, Hugging Face Valuation ... '
+description:
+  'Bitsletter #3: In this episode we discuss how to avoid hot-spots for ML
+  predictions APIs, incremental static regeneration (ISR), Google Imagen and
+  Hugging Face valuation.'
+readMinutes: 10
+image: '/blog/6/cover.png'
+category: 'Newsletter'
+series: 'Bitsletter'
+tags: ['Machine Learning', 'Web Development', 'Research']
+slug: 'bitsletter-3'
+published: true
+datePublished: '2022-05-25'
+dateModified: '2022-05-25'
+images: ['https://assets.bitswired.com/blog/6/cover.png']
+---
+
+## Subscribe to the Bitsletter
+
+If you like my content, support me by
+[subscribing to my newsletter: Bitsletter](https://newsletter.bitswired.com).
+
+Every **Wednesday** receive **actionable content** to stay on top of **AI** &
+**Web Technologies**:
+
+- 1 AI/Machine learning tip
+- 1 Web Tech tip
+- 1 Research paper
+- Curated news and tools in AI and Web
+
+Happy reading.
+
+## 🧠 ML Tip: Avoid inference hot-spots on your machine learning clusters
+
+If you deploy machine learning models with an API access, you likely encountered
+**scaling issues**. Ideally, you don't want the API server facing your clients
+to make the predictions, since CPU intensive tasks on web servers will rapidly
+increase your latency.
+
+One solution is to use a machine learning **cluster**, dedicated to inference in
+production.
+
+However, if your model accepts **batches of inputs**, it's not a good idea to
+send all the inputs to the **same node**. Indeed, if your API receive a large
+batch and send it to a single node, it could **paralyze** this node for long
+time.
+
+These kind of **hot-spots** on your infrastructure can impact seriously the
+**prediction latency**.
+
+One solution is to **split** the batch over the nodes to have an **almost equal
+load** on every nodes, maximizing the parallel computing power of your cluster.
+
+To do so you need to take care of the outputs sequence, or you could return
+predictions out of order. A simple solution is to **associate a key** to each
+group of data you send to the cluster, then each node will return the outputs as
+well as the corresponding key.
+
+For example you receive a batch `(a,b,c,d,e,f)`, you split it into 3 batches
+`(1,a,b), (2,c,d), (3,e,f)`. Then even if you receive predictions in mixed order
+like `(3, pred_e, pred_f), (1, pred_a, pred_b), (2, pred_b, pred_c)`, you can
+send the prediction to the client in the proper order
+`(pred_a, pred_b, pred_c, pred_d, pred_e, pred_f)`.
+
+## 🌐 Web Tip: Incremental Static Regeneration (ISR)
+
+The JavaScript, APIs, and Markup (**JAMstack**) is a popular architecture for
+web development. It works by **entirely pre-rendering** your website into static
+pages, and deploy them using an efficient CDN for super-fast delivery.
+
+Static here doesn't mean only HTML and CSS, you can also ship some JavaScript
+with you web pages and fetch data or call services on the client side if needed.
+
+The main benefits of this architecture are:
+
+- **Security & Scale**: no backend to secure and you only have to serve static
+  files. Using a global CDN like CloudFlare you can scale infinitely.
+- **Performance: pages**: are pre-rendered so the browser will display them in a
+  glimpse, also the code is split between each pages for a faster loading time.
+  However there is one catch: if your website has thousands of pages, for every
+  change you need to rebuild all the pages and it can take some time.
+
+**Incremental Static Regeneration** is a solution to this problem.
+
+In this architecture, you can refresh static pages after you've built your site.
+Developers and content editors can use static generation, per-pages, without
+rebuilding the entire site. You can define a re-validation time per page, and
+the your pages will be re-built at run time at this fixed interval. The cache
+will be automatically invalidated so your CDN can start serving the refreshed
+page.
+
+So if the content on your CMS changed for a specific page, it will be **updated
+after the re-validation time without re-building the entire site**.
+
+Now you can pre-render only the most visited pages, reducing the build time, and
+let the incremental static regeneration handle the rest.
+
+Modern frameworks like **NextJS** support this feature.
+
+## 👩‍🔬 Research Paper: Multiplying Matrices Without Multiplying
+
+Multiplying matrices is the **fundamental building block** of machine learning.
+
+Although we are getting **faster and faster** (thanks to accelerators like GPUs
+and optimized libraries), we need to improve even more: model complexity keeps
+increasing, and lots of applications require real-time processing.
+
+Let’s leave the realm of exact multiplications, and move to approximated matrix
+multiplication: sacrifice precision for speed.
+
+Usual techniques first use linear functions to project the matrices into a space
+with a special structure suitable for fast multiplication (e.g. leverage
+sparsity). Then they multiply the transformed matrices: the problem is reduced
+to exact matrix multiplication.
+
+The paper introduces [MADDNESS](https://arxiv.org/abs/2106.10860), a technique
+employing a non-linear transformation to reduce the problem to table lookups.
+
+In the special case where one matrix is known in advance, MADDNESS **doesn’t use
+any multiply-add operations**. This is usually the case at inference when you
+already know your model weight matrix.
+
+The technique is close to **vector quantization**, but the authors introduce a
+quantization function which **doesn’t use any multiplication**: it relies on
+hashing, averaging, and byte shuffling which are super fast CPU operations.
+
+The paper claims to be **100x** faster than exact multiplication and **10x**
+faster than the existing approximate methods. They even have an open source
+implementation on [GitHub](https://github.com/dblalock/bolt).
+
+## 🛠 Tool: Gradio, a tool for machine learning and data science demos
+
+[Gradio](https://gradio.app/) is a tool to **easily build demos** for data
+science and machine learning applications.
+
+It's important to **show your progress early** in machine learning or data
+science project for many reasons:
+
+Agile development: deliver value fast, and quickly iterate Get inputs and
+remarks from as may stakeholders as possible Attract users early in the
+development process … However it can be daunting and time-consuming for data
+scientists to build themselves a demo web application serving for their models.
+
+Gradio main features:
+
+1. **Fast and easy setup**: you can install it with pip
+2. **Present and share**: works in Notebooks or web applications
+3. **Permanent hosting**: free and permanent hosting on Hugging Face Spaces
+
+## 📰 News
+
+### Google Imagen: Text-to-Image Diffusion Model
+
+Google released [Imagen](https://imagen.research.google/), a new text-to-image
+diffusion model. It uses a super-resolution diffusion architecture, and
+**achieve impressive image quality and text fidelity**. Imagen is a direct
+competitor to the OpenAI DALL-E 2 model.
+
+<Figure
+  ratio={16 / 9}
+  layout="fill"
+  objectFit="contain"
+  src="/blog/6/imagen.png"
+  alt="Google Imagen: Text-To-Image Generation"
+  title="Google Imagen: Text-To-Image Generation"
+/>
+
+### Hugging Face Reaches $2 Billion Valuation
+
+Hugging Face is a **community driven platform** with many repositories for
+machine learning **models, datasets** and **ML applications\*. Using
+**Spaces\*\* you can even demo machine learning easily in web apps. They are
+becoming a must for machine learning practitioners, and so achieving the
+[great valuation of $2 Billion](https://techcrunch.com/2022/05/09/hugging-face-reaches-2-billion-valuation-to-build-the-github-of-machine-learning/).
+
+<Figure
+  ratio={16 / 9}
+  layout="fill"
+  objectFit="contain"
+  src="/blog/6/hugging-face.png"
+  alt="Hugging Face Reaches $2 Billion Valuation"
+  title="Hugging Face Reaches $2 Billion Valuation"
+/>
