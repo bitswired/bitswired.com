@@ -1,0 +1,61 @@
+---
+id: 8
+title:
+  Overfitting To Debug Machine Learning Models (Tutorial With PyTorch And
+  PyTorch Lightning)
+description: Ladk kasdjfna
+readMinutes: 20
+image: '/blog/8/cover.png'
+category: 'Machine Learning'
+tags: ['PyTorch', 'Template', 'Best-Practices']
+slug: 'overfitting-to-debug-machine-learning-models'
+published: true
+datePublished: '2022-06-07'
+dateModified: '2022-06-07'
+images: ['https://assets.bitswired.com/blog/8/cover.png']
+---
+
+## TLDR
+
+Debugging machine learning models can be tricky and time consuming. In This post
+I will show you how to use a simple trick make it easier: overfitting. We are
+going to follow a concrete example to detect a bug in a PyTorch model using a
+handy parameter from the PyTorch Lightning Trainer module. The code is available
+on [GitHub][github repo].
+
+## What is overfitting?
+
+Overfitting happens when your model gets over-specialized on the training data
+and is unable to generalize to new data.
+
+<ColoredBlock variant="info">
+  Generalization is the capacity of a model to predict correclty unseen data. We
+  train machine learning models always with the goal to predict new data.
+  Otherwise the model has no value, if it can only predict data it has already
+  seen.
+</ColoredBlock>
+
+It usually happens because:
+
+- Your model is too complex for your task
+- You don't have enough data to fit the model
+
+<Figure
+  ratio={16 / 9}
+  layout="fill"
+  objectFit="contain"
+  src="/blog/8/overfitting.png"
+  alt="Overfitting Illustrated"
+  title="On the left, we don't have enough data so the model overfits. On the right we gather more data and get a better fit."
+/>
+
+## How overfitting helps to debug models?
+
+## Concrete example with PyTorch and PyTorch Lightning
+
+### Setup
+
+### A handy parameter
+
+[github repo]:
+  https://github.com/bitswired/bitsof-ai/blob/main/projects/torch-data-introduction/TorchData_Introduction.ipynb
